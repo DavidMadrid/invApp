@@ -2,12 +2,16 @@ package com.example.david.invapp;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -17,6 +21,9 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.app.Activity;
 
 import com.example.david.invapp.pojos.Delegacione;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,19 +38,33 @@ public class CentrosActivity extends AppCompatActivity {
     private ServerConnect serverConnect;
 
     private RecyclerView listaCentros;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_centros);
         serverConnect = new ServerConnect();
-        List<Delegacione>delegaciones= new ArrayList<>();
+        List<Delegacione> delegaciones = new ArrayList<>();
         listaCentros = (RecyclerView) findViewById(R.id.recyclerView);
-        listaCentros.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
+        listaCentros.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         CentroAdapter adaptador = new CentroAdapter(delegaciones);
         listaCentros.setAdapter(adaptador);
-        serverConnect.descargarCentro(listaCentros,"","","","");
-      //  radioGroup = (RadioGroup) findViewById(R.id.myRadioGroup);
+        adaptador.setOnItemClickListener(new OnClickListener() {
+                                             @Override
+                                             public void onClick(View view) {
+                                                 Intent i = new Intent(CentrosActivity.this,DatosActivity.class);
+                                                 i.putExtra("id", (long) listaCentros.getChildAdapterPosition(view));
+                                                 startActivity(i);
+                                             }
+                                         });
+
+                serverConnect.descargarCentro(listaCentros, "", "", "", "");
+        //  radioGroup = (RadioGroup) findViewById(R.id.myRadioGroup);
 
        /* radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -89,5 +110,7 @@ public class CentrosActivity extends AppCompatActivity {
             }
 
         });*/
+
     }
+
 }

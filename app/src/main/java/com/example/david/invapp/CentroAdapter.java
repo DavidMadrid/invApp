@@ -17,13 +17,23 @@ public class CentroAdapter extends RecyclerView.Adapter<CentroViewHolder> {
 
  List<Delegacione> listaCentros;
 
+ protected  View.OnClickListener onClickListener;
+
     public CentroAdapter(List<Delegacione> listaCentros) {
         this.listaCentros = listaCentros;
+    }
+
+
+    public void setOnItemClickListener(View.OnClickListener onClickListener){
+
+        this.onClickListener = onClickListener;
+
     }
 
     @Override
     public CentroViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.delegaciones_list_item, parent, false);
+        view.setOnClickListener(onClickListener);
         return new CentroViewHolder(view);
     }
 
@@ -31,7 +41,7 @@ public class CentroAdapter extends RecyclerView.Adapter<CentroViewHolder> {
     public void onBindViewHolder(CentroViewHolder holder, int position) {
 
         Delegacione delegacion = listaCentros.get(position);//linkedlist tiene metodo position se lo añado
-        // ala pizza del adaptador
+        // ala delegacion del adaptador
 
         holder.bindCentro(delegacion);
     }
@@ -47,4 +57,5 @@ public class CentroAdapter extends RecyclerView.Adapter<CentroViewHolder> {
         //posicion para repintar lo justo
         this.notifyItemInserted(0);
     }
+
 }

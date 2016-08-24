@@ -1,12 +1,15 @@
 package com.example.david.invapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.david.invapp.pojos.PrincipalResult;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,7 +29,7 @@ public class PrincipalActivity extends AppCompatActivity {
         recuento=(TextView) findViewById(R.id.tvRecuento);
         centro=(TextView) findViewById(R.id.tvCentro);
         fecha=(TextView) findViewById(R.id.tvFecha);
-        String recuento="";
+        final String recuento="";
         String centro="";
         String empresa="";
 
@@ -34,10 +37,25 @@ public class PrincipalActivity extends AppCompatActivity {
         adaptador = new PrincipalAdapter(resultados);
 
         //Inicilizar el ListView
-        ListView listView = (ListView) findViewById(R.id.lvRecuentos);
+        final ListView listView = (ListView) findViewById(R.id.lvRecuentos);
 
         listView.setAdapter(adaptador);
-
+        adaptador.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(PrincipalActivity.this,DatosActivity.class);
+                i.putExtra("recuento", recuento);
+                i.putExtra("centro", recuento);
+                i.putExtra("fecha", fecha);
+                i.putExtra("persona", almacenInicial);
+                i.putExtra("persona", almacenFinal);
+                i.putExtra("persona", ubicacionInicial);
+                i.putExtra("persona",  ubicacionFinal);
+                i.putExtra("persona", articuloInicial);
+                i.putExtra("persona",  articuloFinal);
+                startActivity(i);
+            }
+        });
 
 
 

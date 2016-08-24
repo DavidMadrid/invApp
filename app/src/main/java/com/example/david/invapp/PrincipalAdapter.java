@@ -20,9 +20,15 @@ public class PrincipalAdapter extends BaseAdapter {
     }
 
     private List<PrincipalResult> resultados;
-
+    protected  View.OnClickListener onClickListener;
     public PrincipalAdapter(List<PrincipalResult> resultados) {
         this.resultados = new LinkedList<>(resultados);
+    }
+
+    public void setOnItemClickListener(View.OnClickListener onClickListener){
+
+        this.onClickListener = onClickListener;
+
     }
 
     @Override
@@ -44,7 +50,7 @@ public class PrincipalAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup viewGroupParent) {
 
         PrincipalResult resultado = resultados.get(position);
-
+        convertView.setOnClickListener(onClickListener);
         if(convertView==null){
           convertView = LayoutInflater.from(viewGroupParent.getContext()).inflate(R.layout.principal_list_item,viewGroupParent,false);
           convertView.setTag(new PrincipalViewHolder((TextView)convertView.findViewById(R.id.tvCentro),(TextView)convertView.findViewById(R.id.tvRecuento),
@@ -52,7 +58,7 @@ public class PrincipalAdapter extends BaseAdapter {
             ((PrincipalViewHolder)convertView.getTag()).getTvCentro().setText(resultado.getCentro());
             ((PrincipalViewHolder)convertView.getTag()).getTvRecuento().setText(resultado.getRecuento());
             ((PrincipalViewHolder)convertView.getTag()).getTvFecha().setText(resultado.getFecha());
-
+            convertView.setOnClickListener(onClickListener);
     }
 
 

@@ -15,7 +15,7 @@ public class CentroViewHolder extends RecyclerView.ViewHolder {
 private TextView tvCentro;
 
     public CentroViewHolder(View itemView) {
-      //  super(itemView);
+        super(itemView);
         tvCentro = (TextView) itemView.findViewById(R.id.tvCentro);
 
     }
