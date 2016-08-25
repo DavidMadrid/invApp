@@ -59,7 +59,7 @@ public class PrincipalActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         PrincipalResult principal = (PrincipalResult) view.getTag();
                         Intent i = new Intent(PrincipalActivity.this,DatosActivity.class);
-                        i.putExtra("DELEGA/CION", principal);
+                        i.putExtra("DELEGACION", principal);
                         startActivity(i);
                     }
                 });

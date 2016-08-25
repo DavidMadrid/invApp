@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ubicacion"
-        android:id="@+id/tvUbicacionEntrada"
+        android:id="@+id/tvRecuento"
         android:layout_below="@+id/tvCentroPrincipal"
         android:layout_marginTop="23dp"
         android:layout_alignRight="@+id/tvDescripcionEntrada"
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvMostrarUbicacionEntrada"
-        android:layout_alignTop="@+id/tvUbicacionEntrada"
+        android:layout_alignTop="@+id/tvRecuento"
         android:layout_toRightOf="@+id/tvCentroPrincipal"
         android:text="MostrarEntrada" />
 
