@@ -48,7 +48,9 @@ public class PrincipalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
            //    hay que meterle los objetos de reciclerview
+
                 server.listaPrincipalRecuento(recuento);
+
                 // creo que con intent meterle
                 PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
                 principalRecuentos.setAdapter(adapter2);
@@ -57,7 +59,7 @@ public class PrincipalActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         PrincipalResult principal = (PrincipalResult) view.getTag();
                         Intent i = new Intent(PrincipalActivity.this,DatosActivity.class);
-                        i.putExtra("DELEGAC/ION", principal);
+                        i.putExtra("DELEGA/CION", principal);
                         startActivity(i);
                     }
                 });
