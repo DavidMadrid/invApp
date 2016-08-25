@@ -7,17 +7,17 @@
         android:layout_width="123dp"
         android:layout_height="40dp"
         android:text="centro......"
-        android:id="@+id/tvAlmacenEntrada" />
+        android:id="@+id/tvCentroPrincipal" />
 
     <TextView
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:text="recuento.."
-        android:id="@+id/tvRecuento" />
+        android:id="@+id/tvRecuentoPrincipal" />
 
     <TextView
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:text="fecha.."
-        android:id="@+id/tvLoteEntrada" />
+        android:id="@+id/tvFechaPrincipal" />
 </LinearLayout>

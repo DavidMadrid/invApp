@@ -77,10 +77,12 @@ public class ServerConnect {
 
     }
 
-    public void hacerRecuento(String recuento,String centro,String empresa ) {
+    public void listaPrincipalRecuento(String recuento) {
 
-        final Call<PrincipalResult> callPrincipal = service.hacerRecuento(recuento, centro, empresa);
+        final Call<PrincipalResult> callPrincipal = service.hacerRecuento(recuento);
         callPrincipal.enqueue(new Callback<PrincipalResult>() {
+           // PrincipalAdapter principalAdapter = list
+
             @Override
             public void onResponse(Call<PrincipalResult> call, Response<PrincipalResult> response) {
 
@@ -101,9 +103,9 @@ public class ServerConnect {
         });
     }
 
-    public void descargarCentro(final RecyclerView listaCentros, String cliente, String empresa, String marca, String token){
-        final Call<ListaRecuentos>callResult =  service.seleccionarCentro(cliente,empresa,marca,token);
-        callResult.enqueue(new Callback<ListaRecuentos>() {
+ /*   public void descargarCentro(final RecyclerView listaCentros, String cliente, String empresa, String marca, String token){
+   //     final Call<ListaRecuentos>callResult =  service.seleccionarCentro(cliente,empresa,marca,token);
+    //    callResult.enqueue(new Callback<ListaRecuentos>() {
             @Override
             public void onResponse(Call<ListaRecuentos> call, Response<ListaRecuentos> response) {
                 CentroAdapter adapter = listaCentros.getAdapter();
@@ -124,10 +126,10 @@ public class ServerConnect {
                  * Este metodo se podria usar en caso de que el servidor
                  * nos mandara respuestas de error con solicitudes erroneas.
                  * Ahora mismo nos indica los errores en el JSON de respuesta.
-                 */
+
             }
         });
 
     }
-
+*/
 }

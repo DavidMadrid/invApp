@@ -15,6 +15,8 @@ import java.util.List;
  * Created by david on 19/08/2016.
  */
 public class PrincipalAdapter extends BaseAdapter {
+
+
     public List<PrincipalResult> getResultados() {
         return resultados;
     }
@@ -46,8 +48,8 @@ public class PrincipalAdapter extends BaseAdapter {
         PrincipalResult resultado = resultados.get(position);
         if(convertView==null){
           convertView = LayoutInflater.from(viewGroupParent.getContext()).inflate(R.layout.principal_list_item,viewGroupParent,false);
-          convertView.setTag(new PrincipalViewHolder((TextView)convertView.findViewById(R.id.tvAlmacenEntrada),(TextView)convertView.findViewById(R.id.tvRecuento),
-                  (TextView)convertView.findViewById(R.id.tvLoteEntrada)));
+          convertView.setTag(new PrincipalViewHolder((TextView)convertView.findViewById(R.id.tvCentroPrincipal),(TextView)convertView.findViewById(R.id.tvRecuento),
+                  (TextView)convertView.findViewById(R.id.tvFechaPrincipal)));
             //convertView.setTag(resultado);
             ((PrincipalViewHolder)convertView.getTag()).getTvCentro().setText(resultado.getCentro());
             ((PrincipalViewHolder)convertView.getTag()).getTvRecuento().setText(resultado.getRecuento());

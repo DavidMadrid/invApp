@@ -3,54 +3,79 @@ package com.example.david.invapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.david.invapp.pojos.Delegacione;
 import com.example.david.invapp.pojos.PrincipalResult;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
 
-    TextView recuento;
-    TextView fecha;
-    TextView centro;
-    TextView empresa;
+    String recuento;
+    String fecha;
+    String centro;
+    String empresa;
     private List<PrincipalResult> resultados;
-    private PrincipalAdapter adaptador;
-
+  //  private PrincipalAdapter adaptador;
+    private RecyclerView principalRecuentos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        recuento=(TextView) findViewById(R.id.tvRecuento);
-        centro=(TextView) findViewById(R.id.tvAlmacenEntrada);
-        fecha=(TextView) findViewById(R.id.tvLoteEntrada);
+      /* recuento= String.valueOf(findViewById(R.id.tvRecuento));// se llenan con la bbdd
+        centro= String.valueOf(findViewById(R.id.tvAlmacenEntrada));
+        fecha= String.valueOf(findViewById(R.id.tvLoteEntrada));*/
+      //  List<PrincipalResult>resultados = new ArrayList<>();
+       // PrincipalAdapter principalAdapter= new PrincipalAdapter(resultados);
+         principalRecuentos = (RecyclerView) findViewById(R.id.recyclerView);
+       principalRecuentos.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        resultados= new ArrayList<>();
+        PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
+        principalRecuentos.setAdapter(adapter2);
         Button miboton = (Button) findViewById(R.id.btLupa);
-        ServerConnect server = new ServerConnect();
+        final ServerConnect server = new ServerConnect();
         miboton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                server.descargarCentro();// hay que meterle los objetos de reciclerview
+           //    hay que meterle los objetos de reciclerview
+                server.listaPrincipalRecuento(recuento);
+                // creo que con intent meterle
+                PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
+                principalRecuentos.setAdapter(adapter2);
+                adapter2.setOnItemClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PrincipalResult principal = (PrincipalResult) view.getTag();
+                        Intent i = new Intent(PrincipalActivity.this,DatosActivity.class);
+                        i.putExtra("DELEGACION", principal);
+                        startActivity(i);
+                    }
+                });
+
             }
         });
         final String recuento="";
         String centro="";
         String empresa="";
-
-        resultados = new LinkedList<>();
-        adaptador = new PrincipalAdapter(resultados);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+      //  resultados = new LinkedList<>();
+       // adaptador = new PrincipalAdapter(resultados);
 
         //Inicilizar el ListView
-        final ListView listView = (ListView) findViewById(R.id.lvRecuentos);
+       // final ListView listView = (ListView) findViewById(R.id.lvRecuentos);
 
-        listView.setAdapter(adaptador);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* listView.setAdapter(adaptador);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() { // listview sin recicler
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long idView) {
                 Intent i = new Intent(PrincipalActivity.this,DatosActivity.class);
@@ -63,11 +88,11 @@ public class PrincipalActivity extends AppCompatActivity {
                 i.putExtra("persona", ubicacionInicial);
                 i.putExtra("persona",  ubicacionFinal);
                 i.putExtra("persona", articuloInicial);
-                i.putExtra("persona",  articuloFinal);*/
+                i.putExtra("persona",  articuloFinal);
                 startActivity(i);
             }
         });
-     /*   adaptador.setOnItemClickListener(new View.OnClickListener() {
+        adaptador.setOnItemClickListener(new View.OnClickListener() {// onclicklistener personalizado
             @Override
             public void onClick(View view) {
             PrincipalResult result = (PrincipalResult) view.getTag();
@@ -88,8 +113,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
 
 
-        ServerConnect miserver = new ServerConnect();
-        miserver.hacerRecuento(recuento,centro,empresa);   //(recuento,empresa,centro);
+    /*    ServerConnect miserver = new ServerConnect();
+        miserver.hacerRecuento(recuento,centro,empresa);   //(recuento,empresa,centro);*/
 
 
 

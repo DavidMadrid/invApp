@@ -42,7 +42,7 @@ public class CentrosActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+   // private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class CentrosActivity extends AppCompatActivity {
                                              }
                                          });
 
-                serverConnect.descargarCentro(listaCentros, "", "", "", "");
+          //      serverConnect.descargarCentro(listaCentros, "", "", "", "");
         //  radioGroup = (RadioGroup) findViewById(R.id.myRadioGroup);
 
        /* radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

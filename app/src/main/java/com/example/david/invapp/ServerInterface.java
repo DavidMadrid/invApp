@@ -14,8 +14,9 @@ import retrofit2.http.Query;
 public interface ServerInterface {
 
     @POST("wsSIB3/wsRecuentosResumen")
-    Call<PrincipalResult> hacerRecuento(@Query("Centro") String centro, @Query("Recuento")String Recuento, @Query("Empresa")String empresa);
-
+    //solo nos hace falta recuento los demas los obtenemos de la bbdd
+  // Call<PrincipalResult> hacerRecuento(@Query("Centro") String centro, @Query("Recuento")String Recuento, @Query("Empresa")String empresa);
+           Call<PrincipalResult> hacerRecuento(@Query("Recuento")String recuento);
 
     @POST("wsSIB4/wsListaDelegaciones")
     Call<Delegacione> seleccionarCentro(@Query("Cliente") String cliente, @Query("Empresa") String empresa,

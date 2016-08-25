@@ -16,7 +16,7 @@ public TextView tvCentro;
 
     public CentroViewHolder(View itemView) {
         super(itemView);
-        tvCentro = (TextView) itemView.findViewById(R.id.tvAlmacenEntrada);
+        tvCentro = (TextView) itemView.findViewById(R.id.tvCentroPrincipal);
         /* itemView.setOnClickListener(this);
 
         Esta seria una alternativa al ClickListener desde la Activity,

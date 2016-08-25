@@ -21,7 +21,7 @@
         android:layout_width="300px"
         android:layout_height="wrap_content"
         android:text="Centro"
-        android:id="@+id/tvAlmacenEntrada"
+        android:id="@+id/tvCentroPrincipal"
         android:layout_marginTop="34dp"
         android:layout_below="@+id/linearLayout3"
         android:layout_alignParentLeft="true"
@@ -40,10 +40,10 @@
     <TextView android:text="Mostrar Centro" android:id="@+id/btnRunForm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvAlmacenEntrada"
-        android:layout_alignBottom="@+id/tvAlmacenEntrada"
-        android:layout_toRightOf="@+id/tvAlmacenEntrada"
-        android:layout_toEndOf="@+id/tvAlmacenEntrada">
+        android:layout_alignTop="@+id/tvCentroPrincipal"
+        android:layout_alignBottom="@+id/tvCentroPrincipal"
+        android:layout_toRightOf="@+id/tvCentroPrincipal"
+        android:layout_toEndOf="@+id/tvCentroPrincipal">
     </TextView>
 
     <TextView
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:text="Recuento"
         android:id="@+id/tvUbicacionEntrada"
-        android:layout_below="@+id/tvAlmacenEntrada"
+        android:layout_below="@+id/tvCentroPrincipal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="32dp" />
@@ -61,14 +61,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvMostrarUbicacionEntrada"
         android:layout_alignTop="@+id/tvUbicacionEntrada"
-        android:layout_toRightOf="@+id/tvAlmacenEntrada"
+        android:layout_toRightOf="@+id/tvCentroPrincipal"
         android:text="MostrarRecuento" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fecha"
-        android:id="@+id/tvLoteEntrada"
+        android:id="@+id/tvFechaPrincipal"
         android:layout_marginTop="37dp"
         android:layout_below="@+id/tvUbicacionEntrada"
         android:layout_alignParentLeft="true"
@@ -79,16 +79,16 @@
         android:layout_height="wrap_content"
         android:text="MostrarFecha"
         android:id="@+id/tvMostrarLoteEntrada"
-        android:layout_alignTop="@+id/tvLoteEntrada"
-        android:layout_toRightOf="@+id/tvAlmacenEntrada"
-        android:layout_toEndOf="@+id/tvAlmacenEntrada" />
+        android:layout_alignTop="@+id/tvFechaPrincipal"
+        android:layout_toRightOf="@+id/tvCentroPrincipal"
+        android:layout_toEndOf="@+id/tvCentroPrincipal" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Almacen"
         android:id="@+id/tvAlmacen"
-        android:layout_below="@+id/tvLoteEntrada"
+        android:layout_below="@+id/tvFechaPrincipal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="126dp" />

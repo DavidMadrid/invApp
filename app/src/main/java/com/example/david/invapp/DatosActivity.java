@@ -15,9 +15,9 @@ public class DatosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos);
 
-        TextView centro = (TextView) findViewById(R.id.tvAlmacenEntrada);
+        TextView centro = (TextView) findViewById(R.id.tvCentroPrincipal);
         TextView recuento =(TextView) findViewById(R.id.tvRecuento);
-        TextView fecha =(TextView) findViewById(R.id.tvLoteEntrada);
+        TextView fecha =(TextView) findViewById(R.id.tvFechaPrincipal);
         TextView AlmacenInicial = (TextView) findViewById(R.id.tvAlmacenInicial);
         TextView AlmacenFinal =  (TextView) findViewById(R.id.tvAlmacenFinal);
         TextView UbicacionInicial =(TextView) findViewById(R.id.tvUbicacionInicial);
