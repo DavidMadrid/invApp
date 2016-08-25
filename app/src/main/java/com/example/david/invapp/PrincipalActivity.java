@@ -51,7 +51,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
                 server.listaPrincipalRecuento(recuento);
 
-                // creo que con intent meterle
+               // // creo que con intent meterle
                 PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
                 principalRecuentos.setAdapter(adapter2);
                 adapter2.setOnItemClickListener(new View.OnClickListener() {
