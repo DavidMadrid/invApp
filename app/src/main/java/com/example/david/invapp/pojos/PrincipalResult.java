@@ -3,10 +3,12 @@ package com.example.david.invapp.pojos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by david on 18/08/2016.
  */
-public class PrincipalResult {
+public class PrincipalResult implements Serializable {
 
     @SerializedName("Centro")
     @Expose

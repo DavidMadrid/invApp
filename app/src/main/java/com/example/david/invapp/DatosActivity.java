@@ -15,9 +15,9 @@ public class DatosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos);
 
-        TextView centro = (TextView) findViewById(R.id.tvCentro);
+        TextView centro = (TextView) findViewById(R.id.tvAlmacenEntrada);
         TextView recuento =(TextView) findViewById(R.id.tvRecuento);
-        TextView fecha =(TextView) findViewById(R.id.tvFecha);
+        TextView fecha =(TextView) findViewById(R.id.tvLoteEntrada);
         TextView AlmacenInicial = (TextView) findViewById(R.id.tvAlmacenInicial);
         TextView AlmacenFinal =  (TextView) findViewById(R.id.tvAlmacenFinal);
         TextView UbicacionInicial =(TextView) findViewById(R.id.tvUbicacionInicial);
@@ -28,7 +28,18 @@ public class DatosActivity extends AppCompatActivity {
 
         //String parametro = getIntent().getStringExtra("parametro");
 
-        PrincipalResult result = (PrincipalResult) getIntent().getSerializableExtra("persona");
-
+        PrincipalResult result = (PrincipalResult) getIntent().getSerializableExtra("RESULT");
+                //recoger los valores y setearlos a cada uno de los parametros
+              centro.setText(result.getCentro());
+              recuento.setText(result.getRecuento());
+              fecha.setText(result.getFecha());
+              AlmacenInicial.setText(result.getAlmacenInicial());
+              AlmacenFinal.setText(result.getAlmacenFinal());
+              UbicacionInicial.setText(result.getUbicacionInicial());
+              UbicacionFinal.setText(result.getUbicacionFinal());
+              UbicacionInicial.setText(result.getUbicacionInicial());
+              UbicacionFinal.setText(result.getUbicacionFinal());
+              ArticuloIncial.setText(result.getProductoInicial());
+              ArticuloFinal.setText(result.getProductoFinal());
     }
 }

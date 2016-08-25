@@ -57,8 +57,9 @@ public class CentrosActivity extends AppCompatActivity {
         adaptador.setOnItemClickListener(new OnClickListener() {
                                              @Override
                                              public void onClick(View view) {
+                                                 Delegacione delegacione = (Delegacione) view.getTag();
                                                  Intent i = new Intent(CentrosActivity.this,DatosActivity.class);
-                                                 i.putExtra("id", (long) listaCentros.getChildAdapterPosition(view));
+                                                 i.putExtra("DELEGACION", delegacione);
                                                  startActivity(i);
                                              }
                                          });

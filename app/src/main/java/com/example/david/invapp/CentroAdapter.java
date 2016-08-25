@@ -44,6 +44,15 @@ public class CentroAdapter extends RecyclerView.Adapter<CentroViewHolder> {
         // ala delegacion del adaptador
 
         holder.bindCentro(delegacion);
+        holder.itemView.setTag(delegacion);
+       /* String nombreDelegacion = delegacion.getCentroCliente();
+        holder.tvCentro.setText(nombreDelegacion);
+
+        Esta es una alternativa a llamar a un metodo del ViewHolder,
+        funciona exactamente igual, pero tdo lo realizamos desde onBindViewHolder sin
+        llamar metodos externos.
+
+        */
     }
 
     @Override

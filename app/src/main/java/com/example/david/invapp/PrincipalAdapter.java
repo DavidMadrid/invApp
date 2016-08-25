@@ -25,12 +25,6 @@ public class PrincipalAdapter extends BaseAdapter {
         this.resultados = new LinkedList<>(resultados);
     }
 
-    public void setOnItemClickListener(View.OnClickListener onClickListener){
-
-        this.onClickListener = onClickListener;
-
-    }
-
     @Override
     public int getCount() {
         return resultados.size();
@@ -50,15 +44,14 @@ public class PrincipalAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup viewGroupParent) {
 
         PrincipalResult resultado = resultados.get(position);
-        convertView.setOnClickListener(onClickListener);
         if(convertView==null){
           convertView = LayoutInflater.from(viewGroupParent.getContext()).inflate(R.layout.principal_list_item,viewGroupParent,false);
-          convertView.setTag(new PrincipalViewHolder((TextView)convertView.findViewById(R.id.tvCentro),(TextView)convertView.findViewById(R.id.tvRecuento),
-                  (TextView)convertView.findViewById(R.id.tvFecha)));
+          convertView.setTag(new PrincipalViewHolder((TextView)convertView.findViewById(R.id.tvAlmacenEntrada),(TextView)convertView.findViewById(R.id.tvRecuento),
+                  (TextView)convertView.findViewById(R.id.tvLoteEntrada)));
+            //convertView.setTag(resultado);
             ((PrincipalViewHolder)convertView.getTag()).getTvCentro().setText(resultado.getCentro());
             ((PrincipalViewHolder)convertView.getTag()).getTvRecuento().setText(resultado.getRecuento());
             ((PrincipalViewHolder)convertView.getTag()).getTvFecha().setText(resultado.getFecha());
-            convertView.setOnClickListener(onClickListener);
     }
 
 

@@ -8,11 +8,13 @@ import android.widget.Toast;
 import com.example.david.invapp.pojos.Delegacione;
 import com.example.david.invapp.pojos.LoginResult;
 import com.example.david.invapp.pojos.PrincipalResult;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by david on 17/08/2016.
@@ -24,6 +26,7 @@ public class ServerConnect {
     public ServerConnect()
     {
         Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("http://tiendahispanofil.sonepar.es/")
                 .build();
         service = retrofit.create(ServerInterface.class);
@@ -32,9 +35,7 @@ public class ServerConnect {
 
     public void realizarLogin(final Activity activity, String usuario, String contrasenna)
     {
-
-         String mensaje="";
-       final Call<LoginResult> callLogin = service.hacerLogin(usuario,contrasenna);
+        final Call<LoginResult> callLogin = service.hacerLogin(usuario,contrasenna);
         callLogin.enqueue(new Callback<LoginResult>() {
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
@@ -46,7 +47,7 @@ public class ServerConnect {
 
             }else{
 
-                if(tipoUsuario.equals("COMERCIAL")){
+                if(tipoUsuario.equals("CPOMERCIAL")){
 
                     Toast.makeText(activity, "su registro ha sido" + resultado, Toast.LENGTH_SHORT).show();
                 }else{
@@ -101,15 +102,16 @@ public class ServerConnect {
     }
 
     public void descargarCentro(final RecyclerView listaCentros, String cliente, String empresa, String marca, String token){
-        final Call<Delegacione>callResult =  service.seleccionarCentro(cliente,empresa,marca,token);
-        callResult.enqueue(new Callback<Delegacione>() {
+        final Call<ListaRecuentos>callResult =  service.seleccionarCentro(cliente,empresa,marca,token);
+        callResult.enqueue(new Callback<ListaRecuentos>() {
             @Override
-            public void onResponse(Call<Delegacione> call, Response<Delegacione> response) {
+            public void onResponse(Call<ListaRecuentos> call, Response<ListaRecuentos> response) {
                 CentroAdapter adapter = listaCentros.getAdapter();
-                for(Centro centro : listaDeCentros)
+                for(Delegacione centro : response.body().getRecuentos()) //meter metodo para meterle toda la lista
                 {
-                    adapter.getResultados().add(centro);
+                    adapter.getListado().add(centro);
                 }
+               // adapter.getListado().addAll(response.body().getRecuentos()); (Alternativa al bucle)
                 adapter.notifyDataSetChanged();
                 // aqui  podriamos poner intencion y mandarnos a CentrosLecturactivity segun
                 //item numero de centro que hayamos seleccionado

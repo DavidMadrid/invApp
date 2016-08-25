@@ -62,7 +62,7 @@
     <Button
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/button2"
+        android:id="@+id/btLupa"
         android:drawableBottom="@drawable/iconolupa"
         android:layout_marginBottom="42dp"
         android:layout_above="@+id/lvRecuentos"
@@ -72,7 +72,7 @@
     <EditText
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:id="@+id/edRecuento"
+        android:id="@+id/edArticuloEntrada"
         android:layout_alignTop="@+id/button2"
         android:layout_toLeftOf="@+id/button2"
         android:text="Numero de recuento"

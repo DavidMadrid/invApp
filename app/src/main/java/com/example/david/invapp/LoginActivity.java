@@ -46,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initUI()
     {
-        boton = (Button) findViewById(R.id.button);
-        edUsuario = (EditText) findViewById(R.id.editText1);
-        edPassword = (EditText) findViewById(R.id.editText2);
+        boton = (Button) findViewById(R.id.btLogin);
+        edUsuario = (EditText) findViewById(R.id.etUsuario);
+        edPassword = (EditText) findViewById(R.id.etPassword);
     }
 
     private void setupListeners()
@@ -79,11 +79,6 @@ public class LoginActivity extends AppCompatActivity {
         miserver = new ServerConnect();
         initUI();
         setupListeners();
-
-
-
-
-
     }
 
 
