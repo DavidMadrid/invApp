@@ -21,13 +21,15 @@ import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
 
+    //recuento obtenido de bbdd
     String recuento;
     String fecha;
     String centro;
     String empresa;
     private List<PrincipalResult> resultados;
-  //  private PrincipalAdapter adaptador;
+    //  private PrincipalAdapter adaptador;
     private RecyclerView principalRecuentos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,30 +37,49 @@ public class PrincipalActivity extends AppCompatActivity {
       /* recuento= String.valueOf(findViewById(R.id.tvRecuento));// se llenan con la bbdd
         centro= String.valueOf(findViewById(R.id.tvAlmacenEntrada));
         fecha= String.valueOf(findViewById(R.id.tvLoteEntrada));*/
-      //  List<PrincipalResult>resultados = new ArrayList<>();
-       // PrincipalAdapter principalAdapter= new PrincipalAdapter(resultados);
-         principalRecuentos = (RecyclerView) findViewById(R.id.recyclerView);
-       principalRecuentos.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        resultados= new ArrayList<>();
+        //  List<PrincipalResult>resultados = new ArrayList<>();
+        // PrincipalAdapter principalAdapter= new PrincipalAdapter(resultados);
+        principalRecuentos = (RecyclerView) findViewById(R.id.recyclerView);
+        principalRecuentos.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        resultados = new ArrayList<>();
         PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
         principalRecuentos.setAdapter(adapter2);
         Button miboton = (Button) findViewById(R.id.btLupa);
         final ServerConnect server = new ServerConnect();
+        server.listaPrincipalRecuento(recuento /*obtenido restadapter retrofit*/);//para cargar la lista entera
+        adapter2.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrincipalResult principal = (PrincipalResult) view.getTag();
+                Intent i = new Intent(PrincipalActivity.this, DatosActivity.class);
+                i.putExtra("DELEGACION", principal);
+                startActivity(i);
+            }
+        });
+
         miboton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           //    hay que meterle los objetos de reciclerview
+                //    hay que meterle los objetos de reciclerview
+                // abria que pasarle el recuento pero solo de los item que coincidan por el recuento tecleado
+                if (recuento == recuento/*recuento obtenido de restAdapter retrofit*/) {
+                    principalRecuentos = (RecyclerView) findViewById(R.id.recyclerView);
+                    principalRecuentos.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+                    resultados = new ArrayList<>();
+                    PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
+                    principalRecuentos.setAdapter(adapter2);
+                    server.listaPrincipalRecuento(recuento);
+                }//else { seguiria la lista entera de arriba
 
-                server.listaPrincipalRecuento(recuento);
-
-               // // creo que con intent meterle
+                // posteriormente si pulsamos el item /tag nos haria igual que arriba una intencion a datos
+                // // creo que con intent meterle
                 PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
                 principalRecuentos.setAdapter(adapter2);
                 adapter2.setOnItemClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         PrincipalResult principal = (PrincipalResult) view.getTag();
-                        Intent i = new Intent(PrincipalActivity.this,DatosActivity.class);
+                        Intent i = new Intent(PrincipalActivity.this, DatosActivity.class);
                         i.putExtra("DELEGACION", principal);
                         startActivity(i);
                     }
@@ -66,15 +87,16 @@ public class PrincipalActivity extends AppCompatActivity {
 
             }
         });
-        final String recuento="";
-        String centro="";
-        String empresa="";
+
+        final String recuento = "";
+        String centro = "";
+        String empresa = "";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
-      //  resultados = new LinkedList<>();
-       // adaptador = new PrincipalAdapter(resultados);
+        //  resultados = new LinkedList<>();
+        // adaptador = new PrincipalAdapter(resultados);
 
         //Inicilizar el ListView
-       // final ListView listView = (ListView) findViewById(R.id.lvRecuentos);
+        // final ListView listView = (ListView) findViewById(R.id.lvRecuentos);
 
        /* listView.setAdapter(adaptador);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() { // listview sin recicler
@@ -117,9 +139,6 @@ public class PrincipalActivity extends AppCompatActivity {
 
     /*    ServerConnect miserver = new ServerConnect();
         miserver.hacerRecuento(recuento,centro,empresa);   //(recuento,empresa,centro);*/
-
-
-
 
 
     }

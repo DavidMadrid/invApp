@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.david.invapp.pojos.Delegacione;
 import com.example.david.invapp.pojos.LoginResult;
 import com.example.david.invapp.pojos.PrincipalResult;
+import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -132,4 +133,26 @@ public class ServerConnect {
 
     }
 */
+    public void descargaEntradaRecuento(String empresa,String centro,String recuento){
+
+        final  Call<DetalleRecuento>callDetalle=service.entradasRecuento(empresa,centro,recuento);
+        callDetalle.enqueue(new Callback<DetalleRecuento>() {
+            @Override
+            public void onResponse(Call<DetalleRecuento> call, Response<DetalleRecuento> response) {
+                DetalleRecuento result = response.body();
+                String almacen=result.getAlmacen();
+                String ubicacion=result.getUbicacion();
+                String lote=result.getLote();
+               // String codigo=result.
+                String descripcion = result.getDescProducto();
+            }
+
+            @Override
+            public void onFailure(Call<DetalleRecuento> call, Throwable t) {
+
+            }
+        });
+
+
+    }
 }

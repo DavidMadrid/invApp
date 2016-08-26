@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 usuario = edUsuario.getText().toString();
                 password = edPassword.getText().toString();
-
                 miserver.realizarLogin(LoginActivity.this,usuario,password);
+
 
 
             }

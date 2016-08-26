@@ -3,6 +3,7 @@ package com.example.david.invapp;
 import com.example.david.invapp.pojos.Delegacione;
 import com.example.david.invapp.pojos.LoginResult;
 import com.example.david.invapp.pojos.PrincipalResult;
+import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
 
 import retrofit2.Call;
 import retrofit2.http.POST;
@@ -26,5 +27,7 @@ public interface ServerInterface {
     @POST("wsSIB4/wsLogin")
     Call<LoginResult> hacerLogin(@Query("Usuario") String usuario, @Query("Password") String contrasenna);
 
-
+    ////Enttrada Activity
+    @POST("wsSIB4/wsRecuentoDetalle")
+    Call<DetalleRecuento>entradasRecuento(@Query("Empresa")String empresa,@Query("Centro")String centro,@Query("Recuento")String recuento);
 }

@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lote"
-        android:id="@+id/tvFechaPrincipal"
+        android:id="@+id/tvLote"
         android:layout_above="@+id/tvCodigoEntrada"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -79,9 +79,9 @@
         android:layout_height="wrap_content"
         android:text="MostrarLote"
         android:id="@+id/tvMostrarLoteEntrada"
-        android:layout_alignTop="@+id/tvFechaPrincipal"
-        android:layout_toRightOf="@+id/tvCentroPrincipal"
-        android:layout_toEndOf="@+id/tvCentroPrincipal" />
+        android:layout_alignTop="@+id/tvLote"
+        android:layout_alignLeft="@+id/tvMostrarUbicacionEntrada"
+        android:layout_alignStart="@+id/tvMostrarUbicacionEntrada" />
 
     <TextView
         android:layout_width="wrap_content"
