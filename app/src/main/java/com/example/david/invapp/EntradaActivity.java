@@ -1,5 +1,6 @@
 package com.example.david.invapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +40,8 @@ TextView descripcioText;
         }else{
 
             Intent intencion = new Intent(EntradaActivity.this,PrincipalActivity.class);
-           /* EntradaActivity.startActivity(intencion);
+         /*   EntradaActivity.startActivity(intencion);
+
             activity.finish();*/
 
         }
