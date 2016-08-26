@@ -15,9 +15,9 @@ import retrofit2.http.Query;
 public interface ServerInterface {
 
     @POST("wsSIB3/wsRecuentosResumen")
-    //solo nos hace falta recuento los demas los obtenemos de la bbdd
-  // Call<PrincipalResult> hacerRecuento(@Query("Centro") String centro, @Query("Recuento")String Recuento, @Query("Empresa")String empresa);
-           Call<PrincipalResult> hacerRecuento(@Query("Recuento")String recuento);
+        //solo nos hace falta recuento los demas los obtenemos de la bbdd
+        // Call<PrincipalResult> hacerRecuento(@Query("Centro") String centro, @Query("Recuento")String Recuento, @Query("Empresa")String empresa);
+    Call<PrincipalResult> hacerRecuento(@Query("Recuento") String recuento);
 
     @POST("wsSIB4/wsListaDelegaciones")
     Call<Delegacione> seleccionarCentro(@Query("Cliente") String cliente, @Query("Empresa") String empresa,
@@ -29,7 +29,13 @@ public interface ServerInterface {
 
     ////Enttrada Activity
     @POST("wsSIB4/wsRecuentoDetalle")
-    Call<DetalleRecuento>entradasRecuento(@Query("Empresa")String empresa,@Query("Centro")String centro,@Query("Recuento")String recuento);
-}
-    ///EnviarActualizarActivity
+    Call<DetalleRecuento> entradasRecuento(@Query("Empresa") String empresa, @Query("Centro") String centro, @Query("Recuento") String recuento);
 
+    ///EnviarActualizarActivity
+    @POST("wsSIB4/wsRecuentosActualiza")
+    Call<DetalleRecuento> actualizaRecuento(@Query("Empresa") String empresa, @Query("Centro") String centro, @Query("Recuento") String recuento,
+                                            @Query("Almacen") String almacen, @Query("Ubicacion") String ubicacion, @Query("Producto") String producto,
+                                            @Query("Lote") String lote, @Query("Cantidad") String cantidad, @Query("Grupal") String grupal);
+
+
+}

@@ -30,7 +30,8 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".EntradaActivity" />
-        <activity android:name=".EnviarActualizarActivity"></activity>
+        <activity android:name=".EnviarActualizarActivity" />
+        <activity android:name=".CodigoBarrasActivity"></activity>
     </application>
 
 </manifest>

@@ -133,6 +133,7 @@ public class ServerConnect {
 
     }
 */
+    //entradaActivity
     public void descargaEntradaRecuento(String empresa,String centro,String recuento){
 
         final  Call<DetalleRecuento>callDetalle=service.entradasRecuento(empresa,centro,recuento);
@@ -143,7 +144,7 @@ public class ServerConnect {
                 String almacen=result.getAlmacen();
                 String ubicacion=result.getUbicacion();
                 String lote=result.getLote();
-               // String codigo=result.
+               String codigo=result.getProducto();
                 String descripcion = result.getDescProducto();
             }
 
@@ -152,6 +153,36 @@ public class ServerConnect {
 
             }
         });
+    }
+    ///EnviarActualizarActivity//////
+    public  void actualizarRecuentos(String empresa,String centro,String recuento,String almacen,String ubicacion,String producto,String lote,
+                                     String cantidad,String grupal){
+        final  Call<DetalleRecuento>callActualiza=service.actualizaRecuento(empresa,centro,recuento,almacen,ubicacion,producto,lote,cantidad,grupal);
+        callActualiza.enqueue(new Callback<DetalleRecuento>() {
+            @Override
+            public void onResponse(Call<DetalleRecuento> call, Response<DetalleRecuento> response) {
+                DetalleRecuento result = response.body();
+                String empresa;
+                String centro= result.getCentro();
+                String recuento = result.getRecuento();
+                String almacen=result.getAlmacen();
+                String ubicacion=result.getUbicacion();
+                String producto= result.getProducto();
+                String lote=result.getLote();
+                String cantidad=result.getCantidad();
+                String grupal ;
+
+
+            }
+
+            @Override
+            public void onFailure(Call<DetalleRecuento> call, Throwable t) {
+
+            }
+        });
+
+
+
 
 
     }

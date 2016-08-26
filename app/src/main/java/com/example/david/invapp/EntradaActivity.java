@@ -53,10 +53,10 @@ TextView descripcioText;
             edCantidad.setEnabled(true);
         }else{
             //en vez de ir a principal iria a la que lee codigo de barras
-            Intent intencion = new Intent(EntradaActivity.this,ActividadCodigoBarrasActivity.class);
+            Intent intencion = new Intent(EntradaActivity.this,CodigoBarrasActivity.class);
             EntradaActivity.this.startActivity(intencion);
-            Bundle extras= intencion.getExtras();
-            intencion.putExtra("ubicacion", (Serializable) ubicacion);
+          /*  Bundle extras= intencion.getExtras();
+            intencion.putExtra("ubicacion", (Serializable) ubicacion);*/
 
 
         }
