@@ -2,11 +2,14 @@ package com.example.david.invapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.Serializable;
 
 public class EntradaActivity extends AppCompatActivity {
 
@@ -40,9 +43,21 @@ TextView descripcioText;
         }else{
 
             Intent intencion = new Intent(EntradaActivity.this,PrincipalActivity.class);
-         /*   EntradaActivity.startActivity(intencion);
+            EntradaActivity.this.startActivity(intencion);
+            Bundle extras= intencion.getExtras();
+            intencion.putExtra("ubicacion", (Serializable) ubicacion);
+            EntradaActivity.this.finish();
+            //sino se permitira entrada de recuento en pantalla
+        }
+        if(edArticulo.equals(articulo)){
+            edCantidad.setEnabled(true);
+        }else{
+            //en vez de ir a principal iria a la que lee codigo de barras
+            Intent intencion = new Intent(EntradaActivity.this,ActividadCodigoBarrasActivity.class);
+            EntradaActivity.this.startActivity(intencion);
+            Bundle extras= intencion.getExtras();
+            intencion.putExtra("ubicacion", (Serializable) ubicacion);
 
-            activity.finish();*/
 
         }
     }

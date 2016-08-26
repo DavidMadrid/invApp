@@ -39,6 +39,10 @@ public class PrincipalActivity extends AppCompatActivity {
         fecha= String.valueOf(findViewById(R.id.tvLoteEntrada));*/
         //  List<PrincipalResult>resultados = new ArrayList<>();
         // PrincipalAdapter principalAdapter= new PrincipalAdapter(resultados);
+        //recoger el recuento de entradaactivity  y mostrar en el list
+        PrincipalResult ubicacion = (PrincipalResult)getIntent().getSerializableExtra("ubicacion");
+        String articulo = getIntent().getStringExtra("articulo");
+       resultados.add(ubicacion);
         principalRecuentos = (RecyclerView) findViewById(R.id.recyclerView);
         principalRecuentos.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         resultados = new ArrayList<>();

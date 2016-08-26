@@ -31,3 +31,5 @@ public interface ServerInterface {
     @POST("wsSIB4/wsRecuentoDetalle")
     Call<DetalleRecuento>entradasRecuento(@Query("Empresa")String empresa,@Query("Centro")String centro,@Query("Recuento")String recuento);
 }
+    ///EnviarActualizarActivity
+
