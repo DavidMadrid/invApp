@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.david.invapp.pojos.Delegacione;
+import com.example.david.invapp.pojos.pojoCentro.Delegacione;
 
 import java.util.List;
 

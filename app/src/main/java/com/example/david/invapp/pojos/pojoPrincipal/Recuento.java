@@ -1,15 +1,9 @@
-package com.example.david.invapp.pojos;
+package com.example.david.invapp.pojos.pojoPrincipal;
+
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-/**
- * Created by david on 18/08/2016.
- */
-public class PrincipalResult implements Serializable {
-
+public class Recuento {
     @SerializedName("Centro")
     @Expose
     private String centro;
@@ -201,6 +195,5 @@ public class PrincipalResult implements Serializable {
     }
 
 }
-
 
 

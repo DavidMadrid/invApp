@@ -1,6 +1,7 @@
-package com.example.david.invapp.pojos;
+package com.example.david.invapp.pojos.pojoPrincipal;
 
 
+import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

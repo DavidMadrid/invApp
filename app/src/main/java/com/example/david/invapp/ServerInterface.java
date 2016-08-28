@@ -1,8 +1,8 @@
 package com.example.david.invapp;
 
-import com.example.david.invapp.pojos.Delegacione;
-import com.example.david.invapp.pojos.LoginResult;
-import com.example.david.invapp.pojos.PrincipalResult;
+import com.example.david.invapp.pojos.pojoCentro.Delegacione;
+import com.example.david.invapp.pojos.pojoLogin.LoginResult;
+import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
 import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
 
 import retrofit2.Call;

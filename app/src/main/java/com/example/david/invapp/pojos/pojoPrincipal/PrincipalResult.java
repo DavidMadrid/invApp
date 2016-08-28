@@ -1,9 +1,26 @@
-package com.example.david.invapp.pojos;
-
+package com.example.david.invapp.pojos.pojoPrincipal;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class Recuento {
+
+import java.io.Serializable;
+
+/**
+ * Created by david on 18/08/2016.
+ */
+public class PrincipalResult implements Serializable {
+
+    private boolean elementoOculto;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     @SerializedName("Centro")
     @Expose
     private String centro;
@@ -194,6 +211,14 @@ public class Recuento {
         this.productoFinal = productoFinal;
     }
 
+    public boolean isElementoOculto() {
+        return elementoOculto;
+    }
+
+    public void setElementoOculto(boolean elementoOculto) {
+        this.elementoOculto = elementoOculto;
+    }
 }
+
 
 

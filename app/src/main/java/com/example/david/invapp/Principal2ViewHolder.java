@@ -5,9 +5,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.david.invapp.pojos.Delegacione;
-import com.example.david.invapp.pojos.ListaRecuentos;
-import com.example.david.invapp.pojos.PrincipalResult;
+import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
 
 /**
  * Created by david on 25/08/2016.

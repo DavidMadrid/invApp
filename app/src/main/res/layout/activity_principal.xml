@@ -72,11 +72,12 @@
     <EditText
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:id="@+id/edArticuloEntrada"
+        android:id="@+id/edNumeroRecuento"
         android:layout_alignTop="@+id/button2"
         android:layout_toLeftOf="@+id/button2"
         android:text="Numero de recuento"
         android:layout_toRightOf="@+id/linearLayout"
-        android:layout_toEndOf="@+id/linearLayout" />
+        android:layout_toEndOf="@+id/linearLayout"
+        android:inputType="number" />
 
 </RelativeLayout>

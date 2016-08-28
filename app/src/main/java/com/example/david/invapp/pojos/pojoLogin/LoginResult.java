@@ -1,4 +1,4 @@
-package com.example.david.invapp.pojos;
+package com.example.david.invapp.pojos.pojoLogin;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -64,13 +64,37 @@ public class LoginResult {
     private String gamificacion;
     @SerializedName("Restricciones")
     @Expose
-    private List<Object> restricciones = new ArrayList<Object>();
+    private List<Restriccione> restricciones = new ArrayList<>();
     @SerializedName("Token")
     @Expose
     private String token;
     @SerializedName("Resultado")
     @Expose
     private String resultado;
+
+    public LoginResult(String codEmpresa, String nameEmpresa, String centro, String codMarca, String keynamemarca,
+                       String usuario, String nameusuario, String keyTipoUsuario, String keyMailUsuario,
+                       String keyMailRepresentante, String keyTelefonoRepresentante, String keyUrlInicio,
+                       String keyVersionIos, String keyVersionAndroid, String keyCambioCondicionesApp,
+                       String keyGamificacion, String keyToken, String keyResultado, List<Restriccione> restricciones) {
+        this.codEmpresa = codEmpresa;
+        this.nameEmpresa = nameEmpresa;
+        this.centro = centro;
+        this.codMarca = codMarca;
+        this.nameMarca = keynamemarca;
+        this.usuario = usuario;
+        this.nameUsuario = nameusuario;
+        this.tipoUsuario = keyTipoUsuario;
+        this.mailUsuario = keyMailUsuario;
+        this.versionIosAPP = keyVersionIos;
+        this.versionAndroidAPP = keyVersionAndroid;
+        this.cambioCondicionesAPP = keyCambioCondicionesApp;
+        this.gamificacion = keyGamificacion;
+        this.token = keyToken;
+        this.resultado = keyResultado;
+        this.restricciones = restricciones;
+
+    }
 
     /**
      *
@@ -383,7 +407,7 @@ public class LoginResult {
      * @return
      * The restricciones
      */
-    public List<Object> getRestricciones() {
+    public List<Restriccione> getRestricciones() {
         return restricciones;
     }
 
@@ -392,7 +416,7 @@ public class LoginResult {
      * @param restricciones
      * The Restricciones
      */
-    public void setRestricciones(List<Object> restricciones) {
+    public void setRestricciones(List<Restriccione> restricciones) {
         this.restricciones = restricciones;
     }
 

@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.david.invapp.pojos.PrincipalResult;
+import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
 
 import java.util.LinkedList;
 import java.util.List;

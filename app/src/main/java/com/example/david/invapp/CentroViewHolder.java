@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.david.invapp.pojos.Delegacione;
+import com.example.david.invapp.pojos.pojoCentro.Delegacione;
 
 
 /**

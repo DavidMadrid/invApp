@@ -5,10 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.david.invapp.CentroViewHolder;
-import com.example.david.invapp.pojos.Delegacione;
-import com.example.david.invapp.pojos.ListaRecuentos;
-import com.example.david.invapp.pojos.PrincipalResult;
+import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,10 +36,16 @@ public class PrincipalAdapter2 extends RecyclerView.Adapter<Principal2ViewHolder
 
     @Override
     public void onBindViewHolder(Principal2ViewHolder holder, int position) {
-
         PrincipalResult principal = resultados.get(position);
-        holder.bindCentro(principal);
-        holder.itemView.setTag(principal);
+        if(principal.isElementoOculto())
+        {
+            holder.itemView.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.bindCentro(principal);
+            holder.itemView.setTag(principal);
+        }
     }
 
 
@@ -57,4 +60,8 @@ public class PrincipalAdapter2 extends RecyclerView.Adapter<Principal2ViewHolder
             //posicion para repintar lo justo
             this.notifyItemInserted(0);
         }
+
+    public List<PrincipalResult> getListaItems() {
+        return resultados;
+    }
 }

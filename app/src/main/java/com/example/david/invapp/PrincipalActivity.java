@@ -6,17 +6,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.EditText;
 
-import com.example.david.invapp.pojos.Delegacione;
-import com.example.david.invapp.pojos.PrincipalResult;
+import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
@@ -46,10 +41,10 @@ public class PrincipalActivity extends AppCompatActivity {
         principalRecuentos = (RecyclerView) findViewById(R.id.recyclerView);
         principalRecuentos.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         resultados = new ArrayList<>();
-        PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
+        final PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
         principalRecuentos.setAdapter(adapter2);
         Button miboton = (Button) findViewById(R.id.btLupa);
-        final ServerConnect server = new ServerConnect();
+        ServerConnect server = new ServerConnect();
         server.listaPrincipalRecuento(recuento /*obtenido restadapter retrofit*/);//para cargar la lista entera
         adapter2.setOnItemClickListener(new View.OnClickListener() {
             @Override
@@ -66,30 +61,21 @@ public class PrincipalActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //    hay que meterle los objetos de reciclerview
                 // abria que pasarle el recuento pero solo de los item que coincidan por el recuento tecleado
-                if (recuento == recuento/*recuento obtenido de restAdapter retrofit*/) {
-                    principalRecuentos = (RecyclerView) findViewById(R.id.recyclerView);
-                    principalRecuentos.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-                    resultados = new ArrayList<>();
-                    PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
-                    principalRecuentos.setAdapter(adapter2);
-                    server.listaPrincipalRecuento(recuento);
+                EditText etNumeroRecuento = (EditText) findViewById(R.id.edNumeroRecuento);
+                String numeroRecuentoIntroducido = etNumeroRecuento.getText().toString();
+                for(PrincipalResult item : adapter2.getListaItems())
+                {
+                    if(!item.getRecuento().equals(numeroRecuentoIntroducido))
+                    {
+                        item.setElementoOculto(true);
+                    }
+                }
+                adapter2.notifyDataSetChanged();
+                 //   server.listaPrincipalRecuento(recuento);
                 }//else { seguiria la lista entera de arriba
 
                 // posteriormente si pulsamos el item /tag nos haria igual que arriba una intencion a datos
                 // // creo que con intent meterle
-                PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
-                principalRecuentos.setAdapter(adapter2);
-                adapter2.setOnItemClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        PrincipalResult principal = (PrincipalResult) view.getTag();
-                        Intent i = new Intent(PrincipalActivity.this, DatosActivity.class);
-                        i.putExtra("DELEGACION", principal);
-                        startActivity(i);
-                    }
-                });
-
-            }
         });
 
         final String recuento = "";

@@ -2,28 +2,16 @@ package com.example.david.invapp;
 
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.view.View.OnClickListener;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.app.Activity;
 
-import com.example.david.invapp.pojos.Delegacione;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.example.david.invapp.pojos.pojoCentro.Delegacione;
 
 import java.util.ArrayList;
 import java.util.List;

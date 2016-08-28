@@ -2,14 +2,11 @@ package com.example.david.invapp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.example.david.invapp.pojos.Delegacione;
-import com.example.david.invapp.pojos.LoginResult;
-import com.example.david.invapp.pojos.PrincipalResult;
+import com.example.david.invapp.pojos.pojoLogin.LoginResult;
+import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
 import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
-import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;

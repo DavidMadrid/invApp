@@ -1,4 +1,4 @@
-package com.example.david.invapp.pojos;
+package com.example.david.invapp.pojos.pojoCentro;
 
 
 import com.google.gson.annotations.Expose;
