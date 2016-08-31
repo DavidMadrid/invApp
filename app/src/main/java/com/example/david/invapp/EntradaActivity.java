@@ -25,6 +25,7 @@ TextView descripcioText;
     EditText edArticulo;
     EditText edCantidad;
     ServerConnect miserver;
+   // miserver.
     String empresa;
     String centro;
     String recuento;

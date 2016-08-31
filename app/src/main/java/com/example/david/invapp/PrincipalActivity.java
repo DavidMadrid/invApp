@@ -8,8 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
+import com.example.david.invapp.modeloDAO.DatabaseHandler;
+import com.example.david.invapp.pojos.pojoLogin.LoginResult;
+import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +20,10 @@ import java.util.List;
 public class PrincipalActivity extends AppCompatActivity {
 
     //recuento obtenido de bbdd
-    String recuento;
     String fecha;
     String centro;
     String empresa;
-    private List<PrincipalResult> resultados;
+    private List<Recuento> resultados;
     //  private PrincipalAdapter adaptador;
     private RecyclerView principalRecuentos;
 
@@ -35,27 +37,38 @@ public class PrincipalActivity extends AppCompatActivity {
         //  List<PrincipalResult>resultados = new ArrayList<>();
         // PrincipalAdapter principalAdapter= new PrincipalAdapter(resultados);
         //recoger el recuento de entradaactivity  y mostrar en el list
-        PrincipalResult ubicacion = (PrincipalResult)getIntent().getSerializableExtra("ubicacion");
-        String articulo = getIntent().getStringExtra("articulo");
-       resultados.add(ubicacion);
-        principalRecuentos = (RecyclerView) findViewById(R.id.recyclerView);
+     //  Recuento ubicacion = (Recuento)getIntent().getSerializableExtra("ubicacion");
+      //  String articulo = getIntent().getStringExtra("articulo");
+
+        String idLogin = getIntent().getStringExtra("ID_LOGIN");
+
+
+       // resultados.add(ubicacion);
+        /////
+        principalRecuentos = (RecyclerView) findViewById(R.id.rvRecuentos);
         principalRecuentos.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         resultados = new ArrayList<>();
         final PrincipalAdapter2 adapter2 = new PrincipalAdapter2(resultados);
         principalRecuentos.setAdapter(adapter2);
         Button miboton = (Button) findViewById(R.id.btLupa);
         ServerConnect server = new ServerConnect();
-        server.listaPrincipalRecuento(recuento /*obtenido restadapter retrofit*/);//para cargar la lista entera
+        InitApp initApp = (InitApp) getApplication();
+        DatabaseHandler dbHandler = initApp.getDbHandler();
+        LoginResult result = dbHandler.getLoginResult(idLogin);
+        server.listaPrincipalRecuento(result,adapter2);//para cargar la lista entera
+
+        //accion de pulsar un elemento de la lista y llevarnos ala pagina de datos
         adapter2.setOnItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrincipalResult principal = (PrincipalResult) view.getTag();
-                Intent i = new Intent(PrincipalActivity.this, DatosActivity.class);
-                i.putExtra("DELEGACION", principal);
+                Recuento principal = (Recuento) view.getTag();
+               // Toast.makeText(PrincipalActivity.this, principal.getRecuento(), Toast.LENGTH_SHORT).show();
+               Intent i = new Intent(PrincipalActivity.this, DatosActivity.class);
+                i.putExtra("RESULT", principal);
                 startActivity(i);
             }
         });
-
+        // accion  de mostrar todos los items o solo los que coinciden con recuento
         miboton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,11 +76,14 @@ public class PrincipalActivity extends AppCompatActivity {
                 // abria que pasarle el recuento pero solo de los item que coincidan por el recuento tecleado
                 EditText etNumeroRecuento = (EditText) findViewById(R.id.edNumeroRecuento);
                 String numeroRecuentoIntroducido = etNumeroRecuento.getText().toString();
-                for(PrincipalResult item : adapter2.getListaItems())
+                for(Recuento item : adapter2.getListaItems())
                 {
-                    if(!item.getRecuento().equals(numeroRecuentoIntroducido))
+                    if(!item.getRecuento().equals(numeroRecuentoIntroducido) && !numeroRecuentoIntroducido.equals(""))
                     {
                         item.setElementoOculto(true);
+                    }
+                    else {
+                        item.setElementoOculto(false);
                     }
                 }
                 adapter2.notifyDataSetChanged();

@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
+import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
 
 public class DatosActivity extends AppCompatActivity {
 
@@ -24,11 +24,10 @@ public class DatosActivity extends AppCompatActivity {
         TextView UbicacionFinal =(TextView) findViewById(R.id.tvUbicacionFinal);
         TextView ArticuloIncial = (TextView) findViewById(R.id.tvArticuloInicial);
         TextView ArticuloFinal = (TextView) findViewById(R.id.tvArticuloFinal);
-        PrincipalResult principal = new PrincipalResult();
 
         //String parametro = getIntent().getStringExtra("parametro");
 
-        PrincipalResult result = (PrincipalResult) getIntent().getSerializableExtra("RESULT");
+        Recuento result = (Recuento) getIntent().getSerializableExtra("RESULT");
                 //recoger los valores y setearlos a cada uno de los parametros
               centro.setText(result.getCentro());
               recuento.setText(result.getRecuento());

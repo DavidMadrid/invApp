@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
+import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,13 +17,13 @@ import java.util.List;
 public class PrincipalAdapter extends BaseAdapter {
 
 
-    public List<PrincipalResult> getResultados() {
+    public List<Recuento> getResultados() {
         return resultados;
     }
 
-    private List<PrincipalResult> resultados;
+    private List<Recuento> resultados;
     protected  View.OnClickListener onClickListener;
-    public PrincipalAdapter(List<PrincipalResult> resultados) {
+    public PrincipalAdapter(List<Recuento> resultados) {
         this.resultados = new LinkedList<>(resultados);
     }
 
@@ -45,7 +45,7 @@ public class PrincipalAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroupParent) {
 
-        PrincipalResult resultado = resultados.get(position);
+        Recuento resultado = resultados.get(position);
         if(convertView==null){
           convertView = LayoutInflater.from(viewGroupParent.getContext()).inflate(R.layout.principal_list_item,viewGroupParent,false);
           convertView.setTag(new PrincipalViewHolder((TextView)convertView.findViewById(R.id.tvCentroPrincipal),(TextView)convertView.findViewById(R.id.tvRecuento),

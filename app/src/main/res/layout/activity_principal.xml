@@ -50,10 +50,10 @@
 
     </LinearLayout>
 
-    <ListView
-        android:layout_width="246dp"
-        android:layout_height="180dp"
-        android:id="@+id/lvRecuentos"
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rvRecuentos"
         android:layout_weight="0.94"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/linearLayout"
@@ -65,7 +65,6 @@
         android:id="@+id/btLupa"
         android:drawableBottom="@drawable/iconolupa"
         android:layout_marginBottom="42dp"
-        android:layout_above="@+id/lvRecuentos"
         android:layout_alignRight="@+id/linearLayout2"
         android:layout_alignEnd="@+id/linearLayout2" />
 
@@ -75,9 +74,9 @@
         android:id="@+id/edNumeroRecuento"
         android:layout_alignTop="@+id/button2"
         android:layout_toLeftOf="@+id/button2"
-        android:text="Numero de recuento"
         android:layout_toRightOf="@+id/linearLayout"
         android:layout_toEndOf="@+id/linearLayout"
-        android:inputType="number" />
+        android:inputType="number"
+        android:hint="Numero de recuento" />
 
 </RelativeLayout>

@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
+import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
 
 /**
  * Created by david on 25/08/2016.
@@ -19,7 +19,6 @@ public class Principal2ViewHolder extends RecyclerView.ViewHolder{
 
     public Principal2ViewHolder(View itemView) {
         super(itemView);
-      ListView listadoRecuentos = (ListView) itemView.findViewById(R.id.lvRecuentos);
          tvCentro = (TextView) itemView.findViewById(R.id.tvCentroPrincipal);
          tvRecuento= (TextView) itemView.findViewById(R.id.tvRecuentoPrincipal);
          tvFecha =  (TextView) itemView.findViewById(R.id.tvFechaPrincipal);
@@ -33,8 +32,8 @@ public class Principal2ViewHolder extends RecyclerView.ViewHolder{
 
     }
 
-    public void bindCentro(PrincipalResult principalResult) {
-        tvCentro.setText(principalResult.getAlmacenInicial());
+    public void bindCentro(Recuento principalResult) {
+        tvCentro.setText(principalResult.getCentro());
         tvRecuento.setText(principalResult.getRecuento());
         tvFecha.setText(principalResult.getFecha());
 

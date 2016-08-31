@@ -2,11 +2,15 @@ package com.example.david.invapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.david.invapp.modeloDAO.DatabaseHandler;
 import com.example.david.invapp.pojos.pojoLogin.LoginResult;
-import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
 import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
+import com.example.david.invapp.pojos.pojoPrincipal.ListaRecuentos;
+import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,8 +53,11 @@ public class ServerConnect {
 
                     Toast.makeText(activity, "su registro ha sido" + resultado, Toast.LENGTH_SHORT).show();
                 }else{
-                    //almacenar en la base de datos
+                    InitApp initApp = (InitApp) activity.getApplication();
+                    DatabaseHandler dbHandler = initApp.getDbHandler();
+                    dbHandler.addLoginResult(result);
                     Intent intencion = new Intent(activity.getApplicationContext(),PrincipalActivity.class);
+                    intencion.putExtra("ID_LOGIN",result.getNameUsuario());
                     activity.startActivity(intencion);
                     activity.finish();
 
@@ -75,22 +82,24 @@ public class ServerConnect {
 
     }
 
-    public void listaPrincipalRecuento(String recuento) {
+    public void listaPrincipalRecuento(LoginResult loginResult, final PrincipalAdapter2 principalAdapter2) {
 
-        final Call<PrincipalResult> callPrincipal = service.hacerRecuento(recuento);
-        callPrincipal.enqueue(new Callback<PrincipalResult>() {
-           // PrincipalAdapter principalAdapter = list
+        final Call<ListaRecuentos> callPrincipal = service.hacerRecuento(loginResult.getCodEmpresa(),loginResult.getCentro(),null);
+        callPrincipal.enqueue(new Callback<ListaRecuentos>() {
 
             @Override
-            public void onResponse(Call<PrincipalResult> call, Response<PrincipalResult> response) {
-
-                //creo que aqui meteria el adaptador
-
-
+            public void onResponse(Call<ListaRecuentos> call, Response<ListaRecuentos> response) {
+                ListaRecuentos result = response.body();
+             /*   for(Recuento recuento : result.getRecuentos())
+                {
+                    Log.i("ServerConnect",recuento.toString());
+                }*/
+                principalAdapter2.getListaItems().addAll(result.getRecuentos());
+                principalAdapter2.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<PrincipalResult> call, Throwable t) {
+            public void onFailure(Call<ListaRecuentos> call, Throwable t) {
                 /**
                  * Este metodo se podria usar en caso de que el servidor
                  * nos mandara respuestas de error con solicitudes erroneas.

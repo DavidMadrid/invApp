@@ -2,8 +2,11 @@ package com.example.david.invapp;
 
 import com.example.david.invapp.pojos.pojoCentro.Delegacione;
 import com.example.david.invapp.pojos.pojoLogin.LoginResult;
-import com.example.david.invapp.pojos.pojoPrincipal.PrincipalResult;
 import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
+import com.example.david.invapp.pojos.pojoPrincipal.ListaRecuentos;
+import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.POST;
@@ -17,7 +20,7 @@ public interface ServerInterface {
     @POST("wsSIB3/wsRecuentosResumen")
         //solo nos hace falta recuento los demas los obtenemos de la bbdd
         // Call<PrincipalResult> hacerRecuento(@Query("Centro") String centro, @Query("Recuento")String Recuento, @Query("Empresa")String empresa);
-    Call<PrincipalResult> hacerRecuento(@Query("Recuento") String recuento);
+    Call<ListaRecuentos> hacerRecuento(@Query("Empresa") String codEmpresa, @Query("Centro") String centro, @Query("Recuento") String numRecuento);
 
     @POST("wsSIB4/wsListaDelegaciones")
     Call<Delegacione> seleccionarCentro(@Query("Cliente") String cliente, @Query("Empresa") String empresa,

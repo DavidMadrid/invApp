@@ -3,7 +3,13 @@ package com.example.david.invapp.pojos.pojoPrincipal;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class Recuento {
+
+import java.io.Serializable;
+
+public class Recuento implements Serializable{
+
+    private boolean elementoOculto;
+
     @SerializedName("Centro")
     @Expose
     private String centro;
@@ -31,6 +37,15 @@ public class Recuento {
     @SerializedName("ProductoFinal")
     @Expose
     private String productoFinal;
+
+    @Override
+    public String toString()
+    {
+        return "Centro: "+centro+" | "+"Recuento: "+recuento+" | "+"Fecha: "+fecha +
+                " Almacen inicial: "+almacenInicial+" | "+"Almacen final: "+almacenFinal+
+            " Ubicacion inicial: "+ubicacionInicial+" | "+"Ubicacion final: "+ubicacionFinal +
+                " Producto inicial: "+productoInicial+" | "+"Producto final: "+productoFinal;
+    }
 
     /**
      *
@@ -194,6 +209,13 @@ public class Recuento {
         this.productoFinal = productoFinal;
     }
 
+    public boolean isElementoOculto() {
+        return elementoOculto;
+    }
+
+    public void setElementoOculto(boolean elementoOculto) {
+        this.elementoOculto = elementoOculto;
+    }
 }
 
 
