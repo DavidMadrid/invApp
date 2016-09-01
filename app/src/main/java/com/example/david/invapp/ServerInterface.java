@@ -42,6 +42,6 @@ public interface ServerInterface {
 
 
     //CodigodeBarrasActivity
-    @POST("wsSIB4/vsCodBarras")
+   // @POST("wsSIB4/vsCodBarras")
 
 }
