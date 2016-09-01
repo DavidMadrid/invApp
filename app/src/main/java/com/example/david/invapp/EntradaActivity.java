@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.david.invapp.modeloDAO.DatabaseHandler;
+import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
+import com.example.david.invapp.pojos.pojoLogin.LoginResult;
+
 import java.io.Serializable;
 
 public class EntradaActivity extends AppCompatActivity {
@@ -26,9 +30,10 @@ TextView descripcioText;
     EditText edCantidad;
     ServerConnect miserver;
    // miserver.
-    String empresa;
-    String centro;
+   String empresa;
+  String centro;
     String recuento;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +85,24 @@ TextView descripcioText;
         ubicacion = edUbicacion.getText().toString();
         articulo = edArticulo.getText().toString();
         cantidad = edCantidad.getText().toString();
+        // aqui tendria que cargar  elementos de la base de datos
+        // como almacen ubicacion lote y descripcion con la respues del servidor
+        LoginResult loginResult=null;
+        empresa=loginResult.getCodEmpresa();
+        centro=loginResult.getCentro();
 
-      //  miserver.descargaEntradaRecuento(empresa,centro,recuento);
+        String almacen=null;
+        String ubicacion = null;
+        String lote =null;
+        String codigo = null;
+        String descripcion = null;
+        ServerConnect server = new ServerConnect();
+        miserver.descargaEntradaRecuento(empresa,centro,recuento,almacen,ubicacion,lote,codigo,descripcion);
+        almacenText.setText(almacen);
+        ubicacionText.setText(ubicacion);
+        loteText.setText(lote);
+        codigoText.setText(codigo);
+        descripcioText.setText(descripcion);
+
     }
 }

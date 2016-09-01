@@ -140,23 +140,24 @@ public class ServerConnect {
     }
 */
     //entradaActivity
-    public void descargaEntradaRecuento(String empresa,String centro,String recuento){
+    public void descargaEntradaRecuento(String empresa, String centro,String recuento,String almacen,String ubicacion,String lote,String codigo,
+                                        String descripcion){
 
-        final  Call<DetalleRecuento>callDetalle=service.entradasRecuento(empresa,centro,recuento);
+        final  Call<DetalleRecuento>callDetalle=service.entradasRecuento(null,null,null);
         callDetalle.enqueue(new Callback<DetalleRecuento>() {
             @Override
             public void onResponse(Call<DetalleRecuento> call, Response<DetalleRecuento> response) {
                 DetalleRecuento result = response.body();
-                String almacen=result.getAlmacen();
+                String recuento=result.getRecuento();
+            // si no es recicler creo que se añadiria vista dinamicamente en la actividad entrada
+                String almacen = result.getAlmacen();
                 String ubicacion=result.getUbicacion();
-                String lote=result.getLote();
-               String codigo=result.getProducto();
+                String lote = result.getLote();
+                String codigo = result.getProducto();
                 String descripcion = result.getDescProducto();
             }
-
             @Override
             public void onFailure(Call<DetalleRecuento> call, Throwable t) {
-
             }
         });
     }
@@ -186,6 +187,7 @@ public class ServerConnect {
 
             }
         });
+    //CodigoBarrasActivity
 
 
 

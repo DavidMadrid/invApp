@@ -41,4 +41,7 @@ public interface ServerInterface {
                                             @Query("Lote") String lote, @Query("Cantidad") String cantidad, @Query("Grupal") String grupal);
 
 
+    //CodigodeBarrasActivity
+    @POST("wsSIB4/vsCodBarras")
+
 }
