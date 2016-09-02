@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.david.invapp.MenuConfigActivity" >
+    <item android:id="@+id/itAcercaDe"
+    android:title="Acerca de..."
+    android:orderInCategory="100"
+    app:showAsAction="never" />
+    <item android:id="@+id/itSalir"
+        android:title="Salir"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/itCentro"
+        android:title="Centro"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/itTipoLectura"
+        android:title="Tipo lectura"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/itCargarCodigos"
+        android:title="Cargar codigos"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>

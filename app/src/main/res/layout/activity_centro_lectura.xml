@@ -8,27 +8,20 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.david.invapp.CentroLecturaActivity">
-    <RadioGroup
-        android:layout_width="wrap_content"
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text"
-        android:id="@+id/newRadioGroup"
-        android:background="#abf234"
-        android:checkedButton="@+id/sound" >
-
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ubicacion"
-        android:text="Ubicacion" />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/articulo"
-        android:text="Articulo"
-        android:layout_below="@+id/articulo"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:orientation="vertical">
+        <RadioButton android:id="@+id/rbUbicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ubicacion"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/rbArticulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="articulo"
+            android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
+
 </RelativeLayout>

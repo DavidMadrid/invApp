@@ -143,7 +143,7 @@ public class ServerConnect {
     public void descargaEntradaRecuento(String empresa, String centro,String recuento,String almacen,String ubicacion,String lote,String codigo,
                                         String descripcion){
 
-        final  Call<DetalleRecuento>callDetalle=service.entradasRecuento(null,null,null);
+        final  Call<DetalleRecuento>callDetalle=service.entradasRecuento(empresa,centro,recuento);
         callDetalle.enqueue(new Callback<DetalleRecuento>() {
             @Override
             public void onResponse(Call<DetalleRecuento> call, Response<DetalleRecuento> response) {

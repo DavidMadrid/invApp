@@ -34,7 +34,8 @@
         <activity android:name=".EnviarActualizarActivity" />
         <activity android:name=".CodigoBarrasActivity" />
         <activity android:name=".AcercaDeActivity" />
-        <activity android:name=".AltaLineaRecuentoActivity"></activity>
+        <activity android:name=".AltaLineaRecuentoActivity" />
+        <activity android:name=".MenuConfigActivity"></activity>
     </application>
 
 </manifest>

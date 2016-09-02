@@ -31,9 +31,9 @@ public class AltaLineaRecuentoActivity extends AppCompatActivity {
                 dbHandler.getWritableDatabase();
                 if(dbHandler!=null){
 
-                   dbHandler.execSQL("INSERT INTO RECUENTO(almacen)"+"VALUES ("+almacen+")","" +
+              /*     dbHandler.execSQL("INSERT INTO RECUENTO(almacen)"+"VALUES ("+almacen+")","" +
                            " UBICACION(ubicacion)"+"VALUES ("+ubicacion+")");
-                   dbHandler.close();
+                   dbHandler.close();*/
 
                 }
             }

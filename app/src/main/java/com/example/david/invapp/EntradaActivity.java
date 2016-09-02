@@ -96,7 +96,7 @@ TextView descripcioText;
         String lote =null;
         String codigo = null;
         String descripcion = null;
-        ServerConnect server = new ServerConnect();
+       // ServerConnect server = new ServerConnect();
         miserver.descargaEntradaRecuento(empresa,centro,recuento,almacen,ubicacion,lote,codigo,descripcion);
         almacenText.setText(almacen);
         ubicacionText.setText(ubicacion);
