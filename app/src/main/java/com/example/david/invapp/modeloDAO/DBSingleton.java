@@ -1,8 +1,6 @@
-package com.example.david.invapp;
+package com.example.david.invapp.modeloDAO;
 
 import android.content.Context;
-
-import com.example.david.invapp.modeloDAO.DatabaseHandler;
 
 /**
  * Created by david on 28/08/2016.

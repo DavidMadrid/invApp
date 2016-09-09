@@ -1,5 +1,6 @@
 package com.example.david.invapp;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,17 +22,17 @@ public class CentroLecturaActivity extends AppCompatActivity {
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-
+        SharedPreferences preferences = getSharedPreferences("config", MODE_PRIVATE);
         // Check which radio button was clicked
         switch (view.getId()) {
             case R.id.rbUbicacion:
                 if (checked)
-                    // Pirates are the best
-                    break;
+                    preferences.edit().putString("TipoLectura", "ubicacion").commit();
+                break;
             case R.id.rbArticulo:
                 if (checked)
-                    // Ninjas rule
-                    break;
+                    preferences.edit().putString("TipoLectura", "articulo").commit();
+                break;
         }
     }
 }

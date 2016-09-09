@@ -10,21 +10,21 @@
     tools:context="com.example.david.invapp.AltaLineaRecuentoActivity">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edAlmacen"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="32dp"
-        android:text="Almacen                                                " />
+        android:hint="Almacen" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edUbicacion"
         android:layout_marginTop="25dp"
-        android:text="Ubicacion"
+        android:hint="Ubicacion"
         android:layout_below="@+id/edAlmacen"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/edLote"
         android:layout_marginTop="26dp"
-        android:text="Lote                                                "
+        android:hint="Lote"
         android:layout_below="@+id/edUbicacion"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/edProducto"
         android:layout_marginTop="36dp"
-        android:text="Producto"
+        android:hint="Producto"
         android:layout_below="@+id/edLote"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -60,7 +60,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/edCantidad"
         android:layout_marginTop="43dp"
-        android:text="Cantidad"
+        android:hint="Cantidad"
+        android:inputType="number"
         android:layout_below="@+id/edProducto"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

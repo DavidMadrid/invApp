@@ -7,11 +7,15 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.david.invapp.modeloDAO.DatabaseHandler;
+import com.example.david.invapp.pojos.pojoEntrada.ListadoDetalle;
 import com.example.david.invapp.pojos.pojoLogin.LoginResult;
 import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
 import com.example.david.invapp.pojos.pojoPrincipal.ListaRecuentos;
 import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,16 +27,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ServerConnect {
 
-    ServerInterface service;
+    public static ServerInterface service;
 
     public ServerConnect()
     {
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://tiendahispanofil.sonepar.es/")
-                .build();
-        service = retrofit.create(ServerInterface.class);
-
+        if(service == null) {
+            final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .readTimeout(60, TimeUnit.SECONDS)
+                    .connectTimeout(60, TimeUnit.SECONDS)
+                    .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl("http://tiendahispanofil.sonepar.es/")
+                    .client(okHttpClient)
+                    .build();
+            service = retrofit.create(ServerInterface.class);
+        }
     }
 
     public void realizarLogin(final Activity activity, String usuario, String contrasenna)
@@ -140,26 +150,8 @@ public class ServerConnect {
     }
 */
     //entradaActivity
-    public void descargaEntradaRecuento(String empresa, String centro,String recuento,String almacen,String ubicacion,String lote,String codigo,
-                                        String descripcion){
-
-        final  Call<DetalleRecuento>callDetalle=service.entradasRecuento(empresa,centro,recuento);
-        callDetalle.enqueue(new Callback<DetalleRecuento>() {
-            @Override
-            public void onResponse(Call<DetalleRecuento> call, Response<DetalleRecuento> response) {
-                DetalleRecuento result = response.body();
-                String recuento=result.getRecuento();
-            // si no es recicler creo que se añadiria vista dinamicamente en la actividad entrada
-                String almacen = result.getAlmacen();
-                String ubicacion=result.getUbicacion();
-                String lote = result.getLote();
-                String codigo = result.getProducto();
-                String descripcion = result.getDescProducto();
-            }
-            @Override
-            public void onFailure(Call<DetalleRecuento> call, Throwable t) {
-            }
-        });
+    public void descargaEntradaRecuento(String empresa, String centro,String recuento, Callback<ListadoDetalle> callback){
+        service.entradasRecuento(empresa,centro,recuento).enqueue(callback);
     }
     ///EnviarActualizarActivity//////
     public  void actualizarRecuentos(String empresa,String centro,String recuento,String almacen,String ubicacion,String producto,String lote,
@@ -168,7 +160,7 @@ public class ServerConnect {
         callActualiza.enqueue(new Callback<DetalleRecuento>() {
             @Override
             public void onResponse(Call<DetalleRecuento> call, Response<DetalleRecuento> response) {
-                DetalleRecuento result = response.body();
+             /*   DetalleRecuento result = response.body();
                 String empresa;
                 String centro= result.getCentro();
                 String recuento = result.getRecuento();
@@ -177,7 +169,7 @@ public class ServerConnect {
                 String producto= result.getProducto();
                 String lote=result.getLote();
                 String cantidad=result.getCantidad();
-                String grupal ;
+                String grupal ;*/
 
 
             }

@@ -15,15 +15,15 @@ public class DatosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos);
 
-        TextView centro = (TextView) findViewById(R.id.tvCentroPrincipal);
-        TextView recuento =(TextView) findViewById(R.id.tvRecuento);
-        TextView fecha =(TextView) findViewById(R.id.tvFechaPrincipal);
-        TextView AlmacenInicial = (TextView) findViewById(R.id.tvAlmacenInicial);
-        TextView AlmacenFinal =  (TextView) findViewById(R.id.tvAlmacenFinal);
-        TextView UbicacionInicial =(TextView) findViewById(R.id.tvUbicacionInicial);
-        TextView UbicacionFinal =(TextView) findViewById(R.id.tvUbicacionFinal);
-        TextView ArticuloIncial = (TextView) findViewById(R.id.tvArticuloInicial);
-        TextView ArticuloFinal = (TextView) findViewById(R.id.tvArticuloFinal);
+        TextView centro = (TextView) findViewById(R.id.tvMostrarCentro);
+        TextView recuento =(TextView) findViewById(R.id.tvMostrarUbicacionEntrada);
+        TextView fecha =(TextView) findViewById(R.id.tvMostrarLoteEntrada);
+        TextView AlmacenInicial = (TextView) findViewById(R.id.tvAlmacenMostrarI);
+        TextView AlmacenFinal =  (TextView) findViewById(R.id.tvMostrarAlmacenF);
+        TextView UbicacionInicial =(TextView) findViewById(R.id.tvUbicacionMostrarI);
+        TextView UbicacionFinal =(TextView) findViewById(R.id.tvMostrarUbicacionF);
+        TextView ArticuloIncial = (TextView) findViewById(R.id.tvArticuloMostrarI);
+        TextView ArticuloFinal = (TextView) findViewById(R.id.tvMostrarArticuloF);
 
         //String parametro = getIntent().getStringExtra("parametro");
 

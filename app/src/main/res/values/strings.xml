@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">invApp</string>
+    <string name="anterior">&lt; Anterior</string>
+    <string name="siguiente">Siguiente &gt;</string>
 </resources>

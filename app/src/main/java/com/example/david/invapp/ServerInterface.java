@@ -1,6 +1,7 @@
 package com.example.david.invapp;
 
 import com.example.david.invapp.pojos.pojoCentro.Delegacione;
+import com.example.david.invapp.pojos.pojoEntrada.ListadoDetalle;
 import com.example.david.invapp.pojos.pojoLogin.LoginResult;
 import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
 import com.example.david.invapp.pojos.pojoPrincipal.ListaRecuentos;
@@ -31,8 +32,8 @@ public interface ServerInterface {
     Call<LoginResult> hacerLogin(@Query("Usuario") String usuario, @Query("Password") String contrasenna);
 
     ////Enttrada Activity
-    @POST("wsSIB4/wsRecuentoDetalle")
-    Call<DetalleRecuento> entradasRecuento(@Query("Empresa") String empresa, @Query("Centro") String centro, @Query("Recuento") String recuento);
+    @POST("wsSIB4/wsRecuentosDetalle")
+    Call<ListadoDetalle> entradasRecuento(@Query("Empresa") String empresa, @Query("Centro") String centro, @Query("Recuento") String recuento);
 
     ///EnviarActualizarActivity
     @POST("wsSIB4/wsRecuentosActualiza")
