@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:text="Almacen"
+        android:id="@+id/tvCentroPrincipal"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingTop="10dp"/>
+
+
+
+    <TextView android:text="MostrarAlmacen" android:id="@+id/tvMostrarAlmacenEntrada"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tvCentroPrincipal"
+        android:paddingTop="10dp"
+        >
+        <!-- android:layout_alignTop="@+id/tvCentroPrincipal"
+       android:layout_alignBottom="@+id/tvCentroPrincipal"-->
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ubicacion"
+        android:id="@+id/tvRecuento"
+        android:layout_below="@+id/tvCentroPrincipal"
+        android:layout_marginTop="20dp"
+        android:layout_alignRight="@+id/tvMostrarUbicacionEntrada"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvMostrarUbicacionEntrada"
+        android:layout_below="@+id/tvCentroPrincipal"
+        android:layout_alignTop="@+id/tvRecuento"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tvCentroPrincipal"
+        android:text="MostrarEntrada" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lote"
+        android:id="@+id/tvLote"
+        android:layout_below="@+id/tvRecuento"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MostrarLote"
+        android:id="@+id/tvMostrarLoteEntrada"
+        android:layout_alignTop="@+id/tvLote"
+        android:layout_alignLeft="@+id/tvMostrarUbicacionEntrada"
+        android:layout_alignStart="@+id/tvMostrarUbicacionEntrada" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo"
+        android:id="@+id/tvCodigoEntrada"
+        android:layout_below="@+id/tvLote"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MostrarDescripcion"
+        android:id="@+id/tvMostrarDescripcionEntrada"
+        android:layout_alignTop="@+id/tvDescripcionEntrada"
+        android:layout_alignLeft="@+id/tvMostrarLoteEntrada"
+        android:layout_alignStart="@+id/tvMostrarLoteEntrada" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripcion"
+        android:id="@+id/tvDescripcionEntrada"
+        android:layout_below="@+id/tvCodigoEntrada"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MostrarCodigo"
+        android:id="@+id/tvMostrarCodigoEntrada"
+        android:layout_alignTop="@+id/tvCodigoEntrada"
+        android:layout_alignLeft="@+id/tvMostrarDescripcionEntrada"
+        android:layout_alignStart="@+id/tvMostrarDescripcionEntrada" />
+
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/botonUbicacion"
+        android:drawableBottom="@drawable/iconolupa"
+        android:layout_alignBaseline="@+id/edUbicacionEntrada"
+        android:layout_toRightOf="@+id/tvMostrarUbicacionEntrada"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edUbicacionEntrada"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/botonUbicacion"
+        android:layout_marginTop="20dp"
+        android:hint="Ubicacion"
+        android:layout_below="@id/tvDescripcionEntrada" />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/botonArticulo"
+        android:drawableBottom="@drawable/iconolupa"
+        android:layout_alignBottom="@+id/edArticuloEntrada"
+        android:layout_alignLeft="@+id/botonUbicacion"
+        android:layout_alignStart="@+id/botonUbicacion" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edArticuloEntrada"
+        android:hint="Articulo"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/edUbicacionEntrada"
+        android:layout_toLeftOf="@+id/botonArticulo"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edCantidadEntrada"
+        android:layout_below="@+id/edArticuloEntrada"
+        android:layout_marginTop="20dp"
+        android:enabled="false"
+        android:inputType="number"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@id/botonArticulo"
+        android:hint="Cantidad" />
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/edCantidadEntrada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/anterior"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="anterior"
+
+            />
+
+        <Button
+            android:id="@+id/siguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/anterior"
+            android:layout_marginLeft="10dp"
+            android:text="siguiente"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>
