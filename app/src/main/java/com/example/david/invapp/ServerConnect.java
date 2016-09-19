@@ -1,13 +1,16 @@
 package com.example.david.invapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.david.invapp.modeloDAO.DatabaseHandler;
 import com.example.david.invapp.pojos.pojoEntrada.ListadoDetalle;
+import com.example.david.invapp.pojos.pojoEnviar.ResultadoEnviar;
 import com.example.david.invapp.pojos.pojoLogin.LoginResult;
 import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
 import com.example.david.invapp.pojos.pojoPrincipal.ListaRecuentos;
@@ -68,6 +71,8 @@ public class ServerConnect {
                     dbHandler.addLoginResult(result);
                     Intent intencion = new Intent(activity.getApplicationContext(),PrincipalActivity.class);
                     intencion.putExtra("ID_LOGIN",result.getNameUsuario());
+                    SharedPreferences preferences = activity.getSharedPreferences("config", Context.MODE_PRIVATE);
+                    preferences.edit().putString("id_login", result.getNameUsuario()).commit();
                     activity.startActivity(intencion);
                     activity.finish();
 
@@ -155,35 +160,8 @@ public class ServerConnect {
     }
     ///EnviarActualizarActivity//////
     public  void actualizarRecuentos(String empresa,String centro,String recuento,String almacen,String ubicacion,String producto,String lote,
-                                     String cantidad,String grupal){
-        final  Call<DetalleRecuento>callActualiza=service.actualizaRecuento(empresa,centro,recuento,almacen,ubicacion,producto,lote,cantidad,grupal);
-        callActualiza.enqueue(new Callback<DetalleRecuento>() {
-            @Override
-            public void onResponse(Call<DetalleRecuento> call, Response<DetalleRecuento> response) {
-             /*   DetalleRecuento result = response.body();
-                String empresa;
-                String centro= result.getCentro();
-                String recuento = result.getRecuento();
-                String almacen=result.getAlmacen();
-                String ubicacion=result.getUbicacion();
-                String producto= result.getProducto();
-                String lote=result.getLote();
-                String cantidad=result.getCantidad();
-                String grupal ;*/
-
-
-            }
-
-            @Override
-            public void onFailure(Call<DetalleRecuento> call, Throwable t) {
-
-            }
-        });
-    //CodigoBarrasActivity
-
-
-
-
-
+                                     String cantidad,String grupal, Callback<ResultadoEnviar> callback){
+        final Call<ResultadoEnviar>callActualiza=service.actualizaRecuento(empresa,centro,recuento,almacen,ubicacion,producto,lote,cantidad,grupal);
+        callActualiza.enqueue(callback);
     }
 }

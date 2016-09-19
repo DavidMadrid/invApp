@@ -18,8 +18,4 @@
         android:title="Tipo lectura"
         android:orderInCategory="100"
         app:showAsAction="never" />
-    <item android:id="@+id/itCargarCodigos"
-        android:title="Cargar codigos"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
 </menu>

@@ -68,9 +68,11 @@ public class AltaLineaRecuentoActivity extends AppCompatActivity {
                 detalle.setLote(lote.getText().toString());
                 detalle.setProducto(producto.getText().toString());
                 detalle.setCantidad(cantidad.getText().toString());
-                EnviarFragment.detallesEnviar.add(detalle);
+                EnviarFragment.detallesEnviar.put(detalle.hashCode(), detalle);
                 Toast.makeText(AltaLineaRecuentoActivity.this, "DetalleRecuento agregado correctamente", Toast.LENGTH_LONG).show();
-                setResult(RESULT_OK);
+                Intent result = new Intent();
+                result.putExtra("createdHash", detalle.hashCode());
+                setResult(RESULT_OK, result);
                 finish();
             }
 

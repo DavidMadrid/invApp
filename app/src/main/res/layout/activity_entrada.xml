@@ -127,9 +127,18 @@
         android:layout_height="40dp"
         android:id="@+id/button4"
         android:drawableBottom="@drawable/iconolupa"
-        android:layout_alignBottom="@+id/edUbicacionEntrada"
+        android:layout_alignBaseline="@+id/edUbicacionEntrada"
         android:layout_toRightOf="@+id/tvMostrarUbicacionEntrada"
-        android:layout_toEndOf="@+id/tvMostrarUbicacionEntrada" />
+        android:layout_marginLeft="10dp"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/botonCodBarrasUbi"
+        android:src="@drawable/barcode"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/button4"
+        android:layout_toRightOf="@+id/button4"/>
 
     <EditText
         android:layout_width="160dp"
@@ -142,14 +151,7 @@
         android:layout_alignRight="@+id/edArticuloEntrada"
         android:layout_alignEnd="@+id/edArticuloEntrada" />
 
-    <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/button2"
-        android:drawableBottom="@drawable/iconolupa"
-        android:layout_alignBottom="@+id/edArticuloEntrada"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_alignStart="@+id/button4" />
+
 
     <EditText
         android:layout_width="260dp"
@@ -157,9 +159,24 @@
         android:id="@+id/edArticuloEntrada"
         android:text="Articulo"
         android:layout_marginTop="36dp"
-        android:layout_below="@+id/edUbicacionEntrada"
-        android:layout_toLeftOf="@+id/button2"
-        android:layout_toStartOf="@+id/button2" />
+        android:layout_below="@+id/edUbicacionEntrada" />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/botonArticulo"
+        android:drawableBottom="@drawable/iconolupa"
+        android:layout_alignBaseline="@+id/edArticuloEntrada"
+        android:layout_toRightOf="@+id/edArticuloEntrada"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/botonCodBarrasArti"
+        android:src="@drawable/barcode"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/botonArticulo"
+        android:layout_toRightOf="@+id/botonArticulo"/>
 
     <EditText
         android:layout_width="wrap_content"

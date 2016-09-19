@@ -1,7 +1,9 @@
 package com.example.david.invapp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -74,6 +76,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SharedPreferences preferences = getSharedPreferences("config", Context.MODE_PRIVATE);
+        String id_login = preferences.getString("id_login", null);
+        if(id_login != null){
+            Intent intencion = new Intent(getApplicationContext(), PrincipalActivity.class);
+            intencion.putExtra("ID_LOGIN",id_login);
+            startActivity(intencion);
+            finish();
+            return;
+        }
+
         miserver = new ServerConnect();
         initUI();
         setupListeners();

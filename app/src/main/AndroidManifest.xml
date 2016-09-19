@@ -31,11 +31,9 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".EntradaActivity" />
-        <activity android:name=".EnviarActualizarActivity" />
         <activity android:name=".CodigoBarrasActivity" />
         <activity android:name=".AcercaDeActivity" />
         <activity android:name=".AltaLineaRecuentoActivity" />
-        <activity android:name=".MenuConfigActivity"></activity>
     </application>
 
 </manifest>

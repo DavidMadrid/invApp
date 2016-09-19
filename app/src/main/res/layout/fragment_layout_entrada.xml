@@ -105,42 +105,58 @@
         android:layout_alignLeft="@+id/tvMostrarDescripcionEntrada"
         android:layout_alignStart="@+id/tvMostrarDescripcionEntrada" />
 
-
-    <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/botonUbicacion"
-        android:drawableBottom="@drawable/iconolupa"
-        android:layout_alignBaseline="@+id/edUbicacionEntrada"
-        android:layout_toRightOf="@+id/tvMostrarUbicacionEntrada"/>
-
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:id="@+id/edUbicacionEntrada"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@id/botonUbicacion"
         android:layout_marginTop="20dp"
         android:hint="Ubicacion"
         android:layout_below="@id/tvDescripcionEntrada" />
 
-    <Button
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/botonUbicacion"
+        android:src="@drawable/iconolupa"
+        android:layout_alignBottom="@id/edUbicacionEntrada"
+        android:layout_toRightOf="@+id/edUbicacionEntrada"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/botonCodBarrasUbi"
+        android:src="@drawable/barcode"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBottom="@+id/botonUbicacion"
+
+        android:layout_toRightOf="@+id/botonUbicacion"/>
+
+
+
+    <ImageButton
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/botonArticulo"
-        android:drawableBottom="@drawable/iconolupa"
+        android:src="@drawable/iconolupa"
         android:layout_alignBottom="@+id/edArticuloEntrada"
-        android:layout_alignLeft="@+id/botonUbicacion"
-        android:layout_alignStart="@+id/botonUbicacion" />
+        android:layout_toRightOf="@+id/edArticuloEntrada"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/botonCodBarrasArti"
+        android:src="@drawable/barcode"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBottom="@+id/botonArticulo"
+        android:layout_toRightOf="@+id/botonArticulo"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:id="@+id/edArticuloEntrada"
         android:hint="Articulo"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/edUbicacionEntrada"
-        android:layout_toLeftOf="@+id/botonArticulo"
         android:layout_alignParentLeft="true" />
 
     <EditText
@@ -152,7 +168,6 @@
         android:enabled="false"
         android:inputType="number"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@id/botonArticulo"
         android:hint="Cantidad" />
 
     <RelativeLayout

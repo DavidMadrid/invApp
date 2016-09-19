@@ -1,6 +1,8 @@
 package com.example.david.invapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -90,7 +92,7 @@ public class PrincipalActivity extends AppCompatActivity {
         });
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
@@ -143,16 +145,20 @@ public class PrincipalActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(PrincipalActivity.this, CentrosActivity.class);
                 startActivity(intent2);
                 break;
-            case R.id.itCargarCodigos:
-                Intent intent3 = new Intent(PrincipalActivity.this, CodigoBarrasActivity.class);
-                startActivity(intent3);
-                break;
             case R.id.itSalir:
-                System.exit(0);
+                SharedPreferences preferences = getSharedPreferences("config", Context.MODE_PRIVATE);
+                preferences.edit().remove("id_login").commit();
+                startActivity(new Intent(PrincipalActivity.this, LoginActivity.class));
+                finish();
                 break;
 
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

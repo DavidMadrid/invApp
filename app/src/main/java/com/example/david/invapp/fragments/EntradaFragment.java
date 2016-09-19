@@ -1,27 +1,35 @@
 package com.example.david.invapp.fragments;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.david.invapp.AltaLineaRecuentoActivity;
+import com.example.david.invapp.CentroLecturaActivity;
+import com.example.david.invapp.CodigoBarrasActivity;
 import com.example.david.invapp.PrincipalActivity;
 import com.example.david.invapp.R;
 import com.example.david.invapp.ServerConnect;
 import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
 import com.example.david.invapp.pojos.pojoEntrada.ListadoDetalle;
 import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,14 +45,18 @@ public class EntradaFragment extends FormParentFragment {
     EditText edUbicacion;
     EditText edArticulo;
     EditText edCantidad;
-    Button botonUbicacion;
-    Button botonArticulo;
+    ImageButton botonUbicacion;
+    ImageButton botonArticulo;
     private int currentItem = 0;
     private ListadoDetalle listado = null;
     private DetalleRecuento actual = null;
     Button anterior;
     Button siguiente;
+    ImageView botonCodBarrasUbi;
+    ImageView botonCodBarrasArti;
     private static final int ALTA_REQUEST_CODE = 1;
+    private static final int UBI_BARRAS_REQUEST_CODE = 2;
+    private static final int ARTI_BARRAS_REQUEST_CODE = 3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,10 +76,12 @@ public class EntradaFragment extends FormParentFragment {
         edUbicacion = (EditText) view.findViewById(R.id.edUbicacionEntrada);
         edArticulo = (EditText) view.findViewById(R.id.edArticuloEntrada);
         edCantidad = (EditText) view.findViewById(R.id.edCantidadEntrada);
-        botonUbicacion = (Button) view.findViewById(R.id.botonUbicacion);
-        botonArticulo = (Button) view.findViewById(R.id.botonArticulo);
+        botonUbicacion = (ImageButton) view.findViewById(R.id.botonUbicacion);
+        botonArticulo = (ImageButton) view.findViewById(R.id.botonArticulo);
         anterior = (Button) view.findViewById(R.id.anterior);
         siguiente = (Button) view.findViewById(R.id.siguiente);
+        botonCodBarrasUbi = (ImageView) view.findViewById(R.id.botonCodBarrasUbi);
+        botonCodBarrasArti = (ImageView) view.findViewById(R.id.botonCodBarrasArti);
 
         anterior.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +157,22 @@ public class EntradaFragment extends FormParentFragment {
                 }
             }
         });
+
+        botonCodBarrasUbi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CodigoBarrasActivity.class);
+                startActivityForResult(intent, UBI_BARRAS_REQUEST_CODE);
+            }
+        });
+
+        botonCodBarrasArti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CodigoBarrasActivity.class);
+                startActivityForResult(intent, ARTI_BARRAS_REQUEST_CODE);
+            }
+        });
     }
 
     private void mostrarDetalleActual(){
@@ -161,16 +191,22 @@ public class EntradaFragment extends FormParentFragment {
             loteText.setText(lote);
             codigoText.setText(codigo);
             descripcioText.setText(descripcion);
+            if(actual.getCantidad() != null)
+                edCantidad.setText(actual.getCantidad());
         }
     }
 
     public void siguiente() {
         String cantidad = edCantidad.getText().toString();
-        if(cantidad != null && !cantidad.trim().isEmpty()){
+        if(cantidad != null && !cantidad.trim().isEmpty() && !cantidad.equals(actual.getCantidad())){
             actual.setCantidad(cantidad);
-            listado.getDetalleRecuento().remove(currentItem);
-            EnviarFragment.detallesEnviar.add(actual);
+            EnviarFragment.detallesEnviar.remove(actual.hashCode());
+            EnviarFragment.detallesEnviar.put(actual.hashCode(), actual);
         }
+
+        edUbicacion.setText("");
+        edArticulo.setText("");
+        edCantidad.setEnabled(false);
 
         if(currentItem < listado.getDetalleRecuento().size() - 1){
             currentItem++;
@@ -179,6 +215,18 @@ public class EntradaFragment extends FormParentFragment {
     }
 
     public void anterior() {
+
+        String cantidad = edCantidad.getText().toString();
+        if(cantidad != null && !cantidad.trim().isEmpty() && !cantidad.equals(actual.getCantidad())){
+            actual.setCantidad(cantidad);
+            EnviarFragment.detallesEnviar.remove(actual.hashCode());
+            EnviarFragment.detallesEnviar.put(actual.hashCode(), actual);
+        }
+
+        edUbicacion.setText("");
+        edArticulo.setText("");
+        edCantidad.setEnabled(false);
+
         if(currentItem > 0){
             currentItem--;
             mostrarDetalleActual();
@@ -236,6 +284,40 @@ public class EntradaFragment extends FormParentFragment {
         if(requestCode == ALTA_REQUEST_CODE){
             edUbicacion.setText("");
             edArticulo.setText("");
+            int createdHash = data.getIntExtra("createdHash", -1);
+            if(createdHash > -1){
+                listado.getDetalleRecuento().add(EnviarFragment.detallesEnviar.get(createdHash));
+            }
+        }else if(requestCode == UBI_BARRAS_REQUEST_CODE){
+            if(resultCode == Activity.RESULT_OK) {
+                edUbicacion.setText(data.getStringExtra("contents"));
+            }
+        }else if(requestCode == ARTI_BARRAS_REQUEST_CODE){
+            if(resultCode == Activity.RESULT_OK) {
+                edArticulo.setText(data.getStringExtra("contents"));
+            }
+        }
+    }
+
+    @Override
+    public void onPreferencesChange(Class<?> from) {
+        super.onPreferencesChange(from);
+        if(from.equals(CentroLecturaActivity.class)){
+            SharedPreferences preferences = getActivity().getSharedPreferences("config", Context.MODE_PRIVATE);
+            String tipoLectura = preferences.getString("TipoLectura", null);
+            if(tipoLectura != null){
+                if(tipoLectura.equals("ubicacion")){
+                    edUbicacion.setEnabled(true);
+                    botonUbicacion.setEnabled(true);
+                    edArticulo.setEnabled(false);
+                    botonArticulo.setEnabled(false);
+                }else{
+                    edUbicacion.setEnabled(false);
+                    botonUbicacion.setEnabled(false);
+                    edArticulo.setEnabled(true);
+                    botonArticulo.setEnabled(true);
+                }
+            }
         }
     }
 }
