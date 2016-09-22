@@ -110,7 +110,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/edUbicacionEntrada"
         android:layout_marginTop="20dp"
+
         android:hint="Ubicacion"
+        android:imeOptions="actionGo"
+        android:singleLine="true"
+        android:inputType="text"
         android:layout_below="@id/tvDescripcionEntrada" />
 
     <ImageButton
@@ -155,6 +159,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/edArticuloEntrada"
         android:hint="Articulo"
+        android:imeOptions="actionGo"
+        android:singleLine="true"
+        android:inputType="text"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/edUbicacionEntrada"
         android:layout_alignParentLeft="true" />

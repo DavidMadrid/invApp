@@ -9,16 +9,20 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.david.invapp.modeloDAO.DatabaseHandler;
+import com.example.david.invapp.pojos.pojoCodBarras.ServerResponse;
 import com.example.david.invapp.pojos.pojoEntrada.ListadoDetalle;
 import com.example.david.invapp.pojos.pojoEnviar.ResultadoEnviar;
 import com.example.david.invapp.pojos.pojoLogin.LoginResult;
 import com.example.david.invapp.pojos.pojoEntrada.DetalleRecuento;
 import com.example.david.invapp.pojos.pojoPrincipal.ListaRecuentos;
 import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -163,5 +167,30 @@ public class ServerConnect {
                                      String cantidad,String grupal, Callback<ResultadoEnviar> callback){
         final Call<ResultadoEnviar>callActualiza=service.actualizaRecuento(empresa,centro,recuento,almacen,ubicacion,producto,lote,cantidad,grupal);
         callActualiza.enqueue(callback);
+    }
+
+    public void descargaCodBarras(final Activity activity, String empresa, String centro, int start, int limit)
+    {
+        Call<ResponseBody> codBarrasRequest = service.descargaCodBarras(empresa,centro,start,limit);
+        codBarrasRequest.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    Log.i("ServerConnect","Codigo respuesta: "+response.code());
+                    Log.i("ServerConnect","Respuesta error: "+ (response.isSuccessful() ? response.message() : response.errorBody().string()));
+
+                    String jsonRespuesta = response.body().string();
+                    InitApp initApp = (InitApp) activity.getApplication();
+                    initApp.getDbHandler().setCodBarras(jsonRespuesta);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 }

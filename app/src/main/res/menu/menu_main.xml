@@ -18,4 +18,8 @@
         android:title="Tipo lectura"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item android:id="@+id/itLecturaCodigoBarras"
+        android:title="Codigo de barras"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 </menu>

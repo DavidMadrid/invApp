@@ -145,6 +145,10 @@ public class PrincipalActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(PrincipalActivity.this, CentrosActivity.class);
                 startActivity(intent2);
                 break;
+            case R.id.itLecturaCodigoBarras:
+                Intent intent3 = new Intent(PrincipalActivity.this, LecturaCodigoBarrasActivity.class);
+                startActivity(intent3);
+                break;
             case R.id.itSalir:
                 SharedPreferences preferences = getSharedPreferences("config", Context.MODE_PRIVATE);
                 preferences.edit().remove("id_login").commit();

@@ -5,7 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Handler;
+import android.os.Looper;
 
+import com.example.david.invapp.pojos.pojoCodBarras.Datos;
+import com.example.david.invapp.pojos.pojoCodBarras.ServerResponse;
 import com.example.david.invapp.pojos.pojoLogin.LoginResult;
 import com.example.david.invapp.pojos.pojoLogin.Restriccione;
 import com.google.gson.Gson;
@@ -42,6 +46,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_RESULTADO = "resultado";
 
     private static final int DATABASE_VERSION = 1;
+    private String TABLE_COD_BARRAS_NAME = "codBarras";
+    private String KEY_COD_BARRAS_JSON = "cod_barras_object";
 
     public DatabaseHandler(Context context) {
         super(context, TABLE_NAME, null, DATABASE_VERSION);
@@ -61,8 +67,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 KEY_VERSION_IOS_APP + " TEXT," + KEY_VERSION_ANDROID_APP + " TEXT," + KEY_CAMBIO_CONDICIONES_APP + " TEXT," +
                 KEY_GAMIFICACION + " TEXT," + KEY_RESTRICCIONES + " TEXT," + KEY_TOKEN + " TEXT," + KEY_RESULTADO + " TEXT" + ")";
 
-        db.execSQL(CREATE_TABLE_LOCAL_INVENTARIO);
+        String CREATE_TABLE_LOCAL_COD_BARRAS = "CREATE TABLE " + TABLE_COD_BARRAS_NAME +
+                "(" + KEY_COD_BARRAS_JSON  + ")";
 
+        db.execSQL(CREATE_TABLE_LOCAL_INVENTARIO);
+        db.execSQL(CREATE_TABLE_LOCAL_COD_BARRAS);
+
+    }
+
+    public void setOnProgressListener(ProgressListener progressListener)
+    {
+        this.progressListener = progressListener;
+    }
+
+    ProgressListener progressListener;
+
+    public interface ProgressListener
+    {
+        void onProgressListener(int progreso);
     }
 
     @Override
@@ -72,6 +94,76 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
 
         onCreate(db);
+    }
+
+    private Thread startProgress()
+    {
+        Thread thread = new Thread(new Runnable() {
+            int contador = 0;
+
+            @Override
+            public void run() {
+                while(!Thread.interrupted()) {
+                    contador += 20;
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressListener.onProgressListener(contador);
+                        }
+                    });
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressListener.onProgressListener(100);
+                    }
+                });
+            }
+        });
+        thread.start();
+        return thread;
+    }
+
+    public void setCodBarras(ServerResponse serverResponse)
+    {
+        Thread hiloProgreso = startProgress();
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        Gson gson = new Gson();
+        String jsonServerResponse = gson.toJson(serverResponse.getDatos().get(0));
+        values.put(KEY_COD_BARRAS_JSON,jsonServerResponse);
+        db.insert(TABLE_COD_BARRAS_NAME,null,values);
+        db.close();
+        hiloProgreso.interrupt();
+    }
+
+    public void setCodBarras(String jsonServerResponse)
+    {
+        Thread hiloProgreso = startProgress();
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_COD_BARRAS_JSON,jsonServerResponse);
+        db.insert(TABLE_COD_BARRAS_NAME,null,values);
+        db.close();
+        hiloProgreso.interrupt();
+    }
+
+
+    public Datos getCodBarras()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_COD_BARRAS_NAME,null);
+        cursor.moveToFirst();
+        String jsonCodBarras = cursor.getString(cursor.getColumnIndex(KEY_COD_BARRAS_JSON));
+        Gson gson = new Gson();
+        Datos datosRecuperados = gson.fromJson(jsonCodBarras,Datos.class);
+        cursor.close();
+        return datosRecuperados;
     }
 
     public void addLoginResult(LoginResult loginResult)

@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:theme="@style/AppTheme.NoActionBar" android:name=".PrincipalActivity" />
+        <activity
+            android:name=".PrincipalActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CentrosActivity" />
         <activity android:name=".CentroLecturaActivity" />
         <activity android:name=".DatosActivity" />
@@ -34,6 +36,7 @@
         <activity android:name=".CodigoBarrasActivity" />
         <activity android:name=".AcercaDeActivity" />
         <activity android:name=".AltaLineaRecuentoActivity" />
+        <activity android:name=".LecturaCodigoBarrasActivity"></activity>
     </application>
 
 </manifest>

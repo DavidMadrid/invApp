@@ -10,6 +10,7 @@ import com.example.david.invapp.pojos.pojoPrincipal.Recuento;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -44,6 +45,7 @@ public interface ServerInterface {
 
 
     //CodigodeBarrasActivity
-   // @POST("wsSIB4/vsCodBarras")
+     @POST("wsSIB4/wsCodBarras")
+    Call<ResponseBody> descargaCodBarras(@Query("Empresa") String empresa, @Query("Centro") String centro,@Query("start") int start,@Query("limit") int limit);
 
 }

@@ -9,9 +9,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -65,6 +67,58 @@ public class EntradaFragment extends FormParentFragment {
         return v;
     }
 
+    private void logicaUbicacion()
+    {
+        String edUbicacionVal = edUbicacion.getText().toString();
+        String ubicacionDetalleRec = listado.getDetalleRecuento().get(currentItem).getUbicacion();
+        if (ubicacionDetalleRec != null && ubicacionDetalleRec.equals(edUbicacionVal)) {
+            edCantidad.setEnabled(true);
+            edCantidad.setFocusableInTouchMode(true);
+            edCantidad.setFocusable(true);
+            edCantidad.requestFocus();
+        }else{
+            int index = 0;
+            boolean found = false;
+            for(index = 0; index < listado.getDetalleRecuento().size(); index++){
+                DetalleRecuento detalle = listado.getDetalleRecuento().get(index);
+                if(detalle.getUbicacion() != null && detalle.getUbicacion().equals(edUbicacionVal)){
+                    found = true;
+                    break;
+                }
+            }
+            if(found){
+                currentItem = index;
+                mostrarDetalleActual();
+            }
+        }
+    }
+
+    private void logicaArticulo()
+    {
+        String edArticuloVal = edArticulo.getText().toString();
+        String articuloDetalleRec = listado.getDetalleRecuento().get(currentItem).getProducto();
+        if (articuloDetalleRec != null && articuloDetalleRec.equals(edArticuloVal)) {
+            edCantidad.setEnabled(true);
+            edCantidad.setFocusableInTouchMode(true);
+            edCantidad.setFocusable(true);
+            edCantidad.requestFocus();
+        }else {
+            int index = 0;
+            boolean found = false;
+            for(index = 0; index < listado.getDetalleRecuento().size(); index++){
+                DetalleRecuento detalle = listado.getDetalleRecuento().get(index);
+                if(detalle.getProducto() != null && detalle.getProducto().equals(edArticuloVal)){
+                    found = true;
+                    break;
+                }
+            }
+            if(found){
+                currentItem = index;
+                mostrarDetalleActual();
+            }
+        }
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -83,6 +137,29 @@ public class EntradaFragment extends FormParentFragment {
         botonCodBarrasUbi = (ImageView) view.findViewById(R.id.botonCodBarrasUbi);
         botonCodBarrasArti = (ImageView) view.findViewById(R.id.botonCodBarrasArti);
 
+        edUbicacion.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                Log.i("onEditorAction","Action ID: "+actionId);
+                if(actionId == EditorInfo.IME_ACTION_GO)
+                {
+                    logicaUbicacion();
+                }
+                return true;
+            }
+        });
+
+        edArticulo.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_GO)
+                {
+                    logicaArticulo();
+                }
+                return true;
+            }
+        });
+
         anterior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,61 +177,14 @@ public class EntradaFragment extends FormParentFragment {
         botonUbicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String edUbicacionVal = edUbicacion.getText().toString();
-                String ubicacionDetalleRec = listado.getDetalleRecuento().get(currentItem).getUbicacion();
-                if (ubicacionDetalleRec != null && ubicacionDetalleRec.equals(edUbicacionVal)) {
-                    edCantidad.setEnabled(true);
-                }else{
-                    int index = 0;
-                    boolean found = false;
-                    for(index = 0; index < listado.getDetalleRecuento().size(); index++){
-                        DetalleRecuento detalle = listado.getDetalleRecuento().get(index);
-                        if(detalle.getUbicacion() != null && detalle.getUbicacion().equals(edUbicacionVal)){
-                            found = true;
-                            break;
-                        }
-                    }
-                    if(found){
-                        currentItem = index;
-                        mostrarDetalleActual();
-                    }else {
-                        Intent intencion = new Intent(getContext(), AltaLineaRecuentoActivity.class);
-                        Bundle extras = intencion.getExtras();
-                        intencion.putExtra("ubicacion", edUbicacionVal);
-                        getActivity().startActivityForResult(intencion, ALTA_REQUEST_CODE);
-                    }
-                }
-
+                logicaUbicacion();
             }
         });
 
         botonArticulo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String edArticuloVal = edArticulo.getText().toString();
-                String articuloDetalleRec = listado.getDetalleRecuento().get(currentItem).getProducto();
-                if (articuloDetalleRec != null && articuloDetalleRec.equals(edArticuloVal)) {
-                    edCantidad.setEnabled(true);
-                }else {
-                    int index = 0;
-                    boolean found = false;
-                    for(index = 0; index < listado.getDetalleRecuento().size(); index++){
-                        DetalleRecuento detalle = listado.getDetalleRecuento().get(index);
-                        if(detalle.getProducto() != null && detalle.getProducto().equals(edArticuloVal)){
-                            found = true;
-                            break;
-                        }
-                    }
-                    if(found){
-                        currentItem = index;
-                        mostrarDetalleActual();
-                    }else {
-                        Intent intencion = new Intent(getContext(), AltaLineaRecuentoActivity.class);
-                        Bundle extras = intencion.getExtras();
-                        intencion.putExtra("producto", edArticuloVal);
-                        getActivity().startActivityForResult(intencion, ALTA_REQUEST_CODE);
-                    }
-                }
+                logicaArticulo();
             }
         });
 
